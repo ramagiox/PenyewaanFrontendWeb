@@ -1,0 +1,69 @@
+<form name="barangadd" (ngSubmit)="createBarang(dataBarang)" class="form-horizontal">
+  
+  <div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">Tambah Barang</h3>
+      </div>
+      <div class="box-body">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">Kode Barang</label>
+      <div class="col-sm-10">
+        <input name ="KdBarang" [(ngModel)]="dataBarang.KdBarang"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Barang">
+      </div>
+    </div>
+  
+    <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Nama Barang</label>
+            <div class="col-sm-10">
+              <input name ="NamaBarang" [(ngModel)]="dataBarang.NamaBarang"  type="text" class="form-control" id="inputEmail3" placeholder="Nama Barang">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Kode Kategori</label>
+            <div class="col-sm-10">
+              <select name ="KdKategori" class="form-control" [(ngModel)]="dataBarang.KdKategori" (change)="onSelect($event.target.value)" [ngModelOptions]="{standalone: true}">  
+                <option value="0"selected="selected">--Select Kategori--</option>  
+                <option *ngFor="let item of KategoriBarang" value={{item.KdKategori}}>{{item.NamaKategori}}</option>  
+                </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Harga Sewa</label>
+            <div class="col-sm-10">
+              <input name ="HargaSewa" [(ngModel)]="dataBarang.HargaSewa"  type="text" class="form-control" id="inputEmail3" placeholder="Harga Sewa">
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Status Barang</label>
+            <div class="col-sm-10">
+              <input name ="StatusBarang" [(ngModel)]="dataBarang.StatusBarang"  type="text" class="form-control" id="inputEmail3" placeholder="Status Barang">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Jumlah Barang</label>
+            <div class="col-sm-10">
+              <input name ="JumlahBarang" [(ngModel)]="dataBarang.JumlahBarang"  type="text" class="form-control" id="inputEmail3" placeholder="Jumlah Barang">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Harga Denda</label>
+            <div class="col-sm-10">
+              <input name ="HargaDenda" [(ngModel)]="dataBarang.HargaDenda"  type="text" class="form-control" id="inputEmail3" placeholder="Harga Denda">
+            </div>
+          </div>
+
+          
+          
+          <button class="btn btn-success" type="submit" style="float:right;"> Save </button>
+          </div>
+          </div>
+          </div>
+   
+  </form>

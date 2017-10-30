@@ -1,0 +1,71 @@
+<form (ngSubmit)="createPerawatan(dataPerawatDiagnosa)" class="form-horizontal">
+  
+  <div class="col-md-10">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">Tambah Perawatan Diagnosa</h3>
+      </div>
+      <div class="box-body">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">Kode Diagnosa</label>
+      <div class="col-sm-10">
+        <input name ="KdDiagnosa" [(ngModel)]="dataPerawatDiagnosa.KdDiagnosa"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Diagnosa">
+      </div>
+    </div>
+  
+    <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Kode Variasi Obat</label>
+            <div class="col-sm-10">
+              <input name ="KdVariasiObat" [(ngModel)]="dataPerawatDiagnosa.KdVariasiObat"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Variasi Obat">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Jangka Pemakaian Obat</label>
+            <div class="col-sm-10">
+              <input name ="JangkaPemakaianObat" [(ngModel)]="dataPerawatDiagnosa.JangkaPemakaianObat"  type="text" class="form-control" id="inputEmail3" placeholder="Jangka Pemakaian Obat">
+            </div>
+          </div>
+
+          <!-- <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Pemberian Obat</label>
+            <div class="col-sm-10">
+              <input name ="TglPemberianObat" [(ngModel)]="dataPerawatDiagnosa.TglPemberianObat"  type="text" class="form-control" id="inputEmail3" placeholder="Nama Provinsi">
+            </div>
+          </div> -->
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Pemberian Obat</label>
+            <div class="col-sm-4">
+            <div class="input-group date">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input name ="TglPemberianObat"  [(ngModel)]="dataPerawatDiagnosa.TglPemberianObat" type="date" class="form-control pull-right" id="datepicker">
+            </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Kode Diagnosa Awal</label>
+            <div class="col-sm-10">
+              <input name ="KdDiagnosaAwal" [(ngModel)]="dataPerawatDiagnosa.KdDiagnosaAwal"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Diagnosa Awal">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Dosis Obat</label>
+            <div class="col-sm-10">
+              <input name ="DosisObat" [(ngModel)]="dataPerawatDiagnosa.DosisObat"  type="text" class="form-control" id="inputEmail3" placeholder="Dosis Obat">
+            </div>
+          </div>
+
+
+
+          
+          
+          <button class="btn btn-success" type="submit"> Save </button>
+   </div>
+   </div>
+   </div>
+  </form>

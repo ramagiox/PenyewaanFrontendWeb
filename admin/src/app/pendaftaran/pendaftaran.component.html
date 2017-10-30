@@ -1,0 +1,66 @@
+<!-- <div>
+  <a class ="btn btn-success" [routerLink]="['./add']"><span class="glyphicon glyphicon-plus"></span></a>
+<table class="table">
+<tr>
+<td> Kode Perawatan </td>
+<td> Nama Perawatan </td>
+<td> Aksi </td>
+</tr>
+<tr *ngFor="let item of dataPendaftaran">
+<td> {{item.KdPendaftaran}}</td>
+<td>{{item.KdPasien}}</td>
+<td>
+    <a class ="btn btn-success" [routerLink]="['./detail/'+item._id]"><span class="glyphicon glyphicon-search"></span></a>
+    <a class ="btn btn-info" [routerLink]="['./edit/'+item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class ="btn btn-danger" (click)= "pendaftaranDelete(item._id)" ><span class="glyphicon glyphicon-trash"></span></a>      
+</td>
+</tr>
+</table>
+</div> -->
+
+<!-- TABLE: LATEST ORDERS -->
+<div class="col-md-10">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Pendaftaran</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+          <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Perawat</span></a>
+        <div class="table-responsive">
+          <table class="table no-margin">
+            <thead>
+            <tr>
+              <th>Kode Pendaftaran</th>
+              <th>Kode Pasien</th>
+              <th>Kode Rumah Sakit</th>
+              <th>Kode Ruang Diagnosa</th>
+              <th>Aksi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of dataPendaftaran">
+              <td>{{item.KdPendaftaran}}</td>
+              <td>{{item.KdPasien}}</td>
+              <td>{{item.KdRumahSakit}}</td>
+              <td>{{item.KdRuangDiagnosa}}</td>
+              <td>
+                <a class ="label label-success" [routerLink]="['./detail/'+item._id]"><span class="glyphicon glyphicon-search"></span></a>
+                <a class ="label label-info" [routerLink]="['./edit/'+item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class ="label label-danger" (click)= "pendaftaranDelete(item._id)" ><span class="glyphicon glyphicon-trash"></span></a>
+              </td>
+            </tr>       
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer clearfix">
+        <!-- <a href="" class="btn btn-sm btn-info btn-flat pull-left">Tambah Perawatan</a> -->
+        <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a> -->
+      </div>
+      <!-- /.box-footer -->
+    </div>
+  </div>
+

@@ -1,0 +1,60 @@
+<form action ="" class="form-horizontal">
+    <div class="col-md-10">
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">Perawatan Diagnosa Edit</h3>
+          </div>
+          <div class="box-body">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Kode Diagnosa</label>
+    <div class="col-sm-10">
+      <input  name= "KdDiagnosa" [(ngModel)]="dataEdit.KdDiagnosa" type="text" class="form-control"  placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Kode Variasi Obat</label>
+          <div class="col-sm-10">
+            <input name = "KdVariasiObat" [(ngModel)]="dataEdit.KdVariasiObat" type="text" class="form-control"  placeholder="">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Jangka Pemakaian Obat</label>
+          <div class="col-sm-10">
+            <input name = "JangkaPemaikainObat" [(ngModel)]="dataEdit.JangkaPemakaianObat" type="text" class="form-control"  placeholder="">
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Pemberian Obat</label>
+            <div class="col-sm-8">
+            <div class="input-group date">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input name = "dataEdit.TglPemberianObat" [(ngModel)]="dataEdit.TglPemberianObat"type="date" class="form-control pull-right" id="datepicker">
+            </div>
+            </div>
+          </div>
+
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Kode Diagnosa Awal</label>
+          <div class="col-sm-10">
+            <input name = "KdDiagnosaAwal" [(ngModel)]="dataEdit.KdDiagnosaAwal" type="text" class="form-control"  placeholder="">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Dosis Obat</label>
+          <div class="col-sm-10">
+            <input name = "DosisObat" [(ngModel)]="dataEdit.DosisObat" type="text" class="form-control"  placeholder="">
+          </div>
+        </div>
+        
+        <button class="btn btn-success" (click)= "perawatanEdit(dataEdit._id)" type="submit"> Save </button>
+        </div>
+    </div>
+  </div>
+</form>

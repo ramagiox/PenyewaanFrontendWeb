@@ -1,0 +1,128 @@
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Data Barang</h3>
+    
+                  <div class="box-tools pull-right">
+                    <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Barang</span></a>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" >
+            
+                        <table id="example"   class="table table-striped table-bordered" *ngIf="this.temp_var">
+                                <thead>
+                                  <tr>
+                                      <th>Nama Barang</th>
+                                      <th>Kode Kategori</th>
+                                      <th>Jumlah Barang</th>
+                                      <th>Harga Sewa</th>
+                                      <th data-orderable="false">Aksi</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let rec of this.dataBarang">
+                                     
+                                      <td>{{rec.NamaBarang}}</td>
+                                      <td>{{rec.KdKategori}}</td>
+                                      <td>{{rec.JumlahBarang}}</td>
+                                      <td>{{rec.HargaSewa}}</td>
+                                      <td>
+                                            <a class ="label label-success" [routerLink]="['./detail/'+rec._id]"><span class="glyphicon glyphicon-search"></span></a>
+                                            <a class ="label label-info" (click)= "barangmodal(rec._id)" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a class ="label label-danger" (click)= "barangDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
+                                      </td>
+                                     
+                                    </tr>
+                                 
+                                </tbody>
+                              </table>
+
+                        
+                <!-- ./box-body -->
+                </div>
+                <!-- /.box-footer -->
+              </div>
+
+              
+      
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                      </div>
+                      <div class="modal-body">
+                          <form   action ="" class="form-horizontal" *ngIf="dataEdit">
+                              
+                                  <div class="col-md-12">
+                                      <div class="box box-primary">
+                                        <div class="box-header">
+                                          <h3 class="box-title">Barang Edit</h3>
+                                        </div>
+                                        <div class="box-body">
+                                <div class="form-group" >
+                                  <label for="inputEmail3" class="col-sm-2 control-label">Kode Barang</label>
+                                  <div class="col-sm-10">
+                                    <input  name= "KdBarang" [(ngModel)]="dataEdit.KdBarang" type="text" class="form-control"  placeholder="">
+                                  </div>
+                                </div>
+                              
+                                <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Nama Barang</label>
+                                        <div class="col-sm-10">
+                                          <input name = "NamaBarang" [(ngModel)]="dataEdit.NamaBarang" type="text" class="form-control"  placeholder="">
+                                        </div>
+                                      </div>
+                              
+                                      <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Kode Kategori</label>
+                                        <div class="col-sm-10">
+                                          <select class="form-control" [(ngModel)]="dataEdit.KdKategori" [ngModelOptions]="{standalone: true}">  
+                                            <option value="0" selected="selected">--Select Kategori--</option>  
+                                            <option selected="selected" *ngFor="let item of KategoriBarang" value={{item.KdKategori}}>{{item.NamaKategori}}</option>  
+                                            </select>
+                                        </div>
+                                      </div>
+                              
+                                      <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Harga Sewa</label>
+                                        <div class="col-sm-10">
+                                          <input name = "HargaSewa" [(ngModel)]="dataEdit.HargaSewa" type="text" class="form-control"  placeholder="">
+                                        </div>
+                                      </div>
+                            
+                                      <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Status Barang</label>
+                                        <div class="col-sm-10">
+                                          <input name = "StatusBarang" [(ngModel)]="dataEdit.StatusBarang" type="text" class="form-control"  placeholder="">
+                                        </div>
+                                      </div>
+                            
+                                      <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Jumlah Barang</label>
+                                        <div class="col-sm-10">
+                                          <input name = "JumlahBarang" [(ngModel)]="dataEdit.JumlahBarang" type="text" class="form-control"  placeholder="">
+                                        </div>
+                                      </div>
+                            
+                                      <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Harga Denda</label>
+                                        <div class="col-sm-10">
+                                          <input name = "HargaDenda" [(ngModel)]="dataEdit.HargaDenda" type="text" class="form-control"  placeholder="">
+                                        </div>
+                                      </div>                                     
+                                      <button class="btn btn-success" (click)= "barangEdit(dataEdit._id)" type="submit" style="float:right;"> Save </button>
+                                      </div>
+                                      </div>
+                                      </div>
+                              </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send message</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>

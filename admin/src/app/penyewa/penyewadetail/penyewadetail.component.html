@@ -1,0 +1,71 @@
+
+<div class="col-md-10">
+  <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Data Penyewa</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table" *ngIf="dataDetail">
+          <tr>
+            <th style="width: 10px">#</th>
+            <th>Atribut</th>
+            <th>Detail</th>
+            
+          </tr>
+          <tr >
+            <td>1.</td>
+            <td>Kode Penyewa</td>
+            <td>{{dataDetail.KdPenyewa}}
+                
+            </td>
+           
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>Username</td>
+            <td>
+                {{dataDetail.UserName}}
+            </td>
+            
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>Nama Penyewa</td>
+            <td>
+                {{dataDetail.NamaPenyewa}}
+            </td>
+          
+          </tr>
+          <tr >
+            <td>4.</td>
+            <td>Email Penyewa</td>
+            <td>
+                {{dataDetail.EmailPenyewa}}
+            </td>
+         
+          </tr>
+          <tr>
+              <td>5.</td>
+              <td>Alamat Penyewa</td>
+              <td>
+                  {{dataDetail.AlamatPenyewa}}
+              </td>
+             
+            </tr>
+
+            <tr >
+              <td>6.</td>
+              <td>No Telp</td>
+              <td>
+                  {{dataDetail.NoTelp}}
+              </td>
+             
+            </tr>
+
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+  </div>
+   

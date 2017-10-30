@@ -1,0 +1,63 @@
+<form nama="pendaftaranedit"  action ="" class="form-horizontal">
+
+    <div class="col-md-10">
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">Pendaftaran Edit</h3>
+          </div>
+          <div class="box-body">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Kode Pendaftaran</label>
+    <div class="col-sm-8">
+      <input  name= "KdPendaftaran" [(ngModel)]="dataEdit.KdPendaftaran" type="text" class="form-control"  placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Kode Pasien</label>
+          <div class="col-sm-8">
+            <input name = "KdPasien" [(ngModel)]="dataEdit.KdPasien" type="text" class="form-control"  placeholder="">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Kode Rumah Sakit</label>
+          <div class="col-sm-8">
+            <input name = "KdRumahSakit" [(ngModel)]="dataEdit.KdRumahSakit" type="text" class="form-control"  placeholder="">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Kode Ruang Diagnosa</label>
+          <div class="col-sm-8">
+            <input name = "KdRuangDiagnosa" [(ngModel)]="dataEdit.KdRuangDiagnosa" type="text" class="form-control"  placeholder="">
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Pendaftaran</label>
+          <div class="col-sm-8">
+            <input name = "TglPendaftaran" [(ngModel)]="dataEdit.TglPendaftaran" type="date" class="form-control"  placeholder="">
+          </div>
+        </div> -->
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Pendaftaran</label>
+            <div class="col-sm-8">
+            <div class="input-group date">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input name = "TglPendaftaran" [(ngModel)]="dataEdit.TglPendaftaran" type="date" class="form-control pull-right" id="datepicker">
+            </div>
+            </div>
+            <!-- /.input group -->
+          </div>
+
+       
+        
+        <button class="btn btn-success" (click)= "pendaftaranEdit(dataEdit._id)" type="submit"> Save </button>
+        </div>
+        </div>
+        </div>
+</form>

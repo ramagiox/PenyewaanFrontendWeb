@@ -1,0 +1,58 @@
+<form name="barangadd" (ngSubmit)="createPembayaran(dataPembayaran)" class="form-horizontal">
+    
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Tambah Pembayaran</h3>
+        </div>
+        <div class="box-body">
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Kode Pembayaran</label>
+        <div class="col-sm-10">
+          <input name ="KdPembayaran" [(ngModel)]="dataPembayaran.KdPembayaran"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Pembayaran">
+        </div>
+      </div>
+    
+      <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Pembayaran</label>
+              <div class="col-sm-4">
+                <input name ="TglPembayaran" [(ngModel)]="dataPembayaran.TglPembayaran"  type="date" class="form-control" id="inputEmail3" placeholder="Tanggal Pembayaran">
+              </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Harga Total</label>
+                <div class="col-sm-10">
+                  <input name ="HargaTotal" [(ngModel)]="dataPembayaran.HargaTotal"  type="text" class="form-control" id="inputEmail3" placeholder="Harga Total">
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Status Pembayaran</label>
+                  <div class="col-sm-10">
+                    <input name ="StatusPembayaran" [(ngModel)]="dataPembayaran.StatusPembayaran"  type="text" class="form-control" id="inputEmail3" placeholder="Status Pembayaran">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Kode Penyewa</label>
+                    <div class="col-sm-10">
+                      <input name ="KdPenyewa" [(ngModel)]="dataPembayaran.KdPenyewa"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Penyewa">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">Kode Data Sewa</label>
+                      <div class="col-sm-10">
+                        <input name ="KdDataSewa" [(ngModel)]="dataPembayaran.KdDataSewa"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Data Sewa">
+                      </div>
+                    </div>
+  
+            
+            
+            <button class="btn btn-success" type="submit" style="float:right;"> Save </button>
+            </div>
+            </div>
+            </div>
+     
+    </form>

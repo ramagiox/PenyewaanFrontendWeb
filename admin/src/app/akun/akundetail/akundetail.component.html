@@ -1,0 +1,45 @@
+
+<div class="col-md-10">
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Data Pembayaran</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table class="table" *ngIf="dataDetail">
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>Atribut</th>
+              <th>Detail</th>
+              
+            </tr>
+            <tr >
+              <td>1.</td>
+              <td>Username</td>
+              <td>{{dataDetail.UserName}}
+                  
+              </td>
+             
+            </tr>
+            <tr>
+              <td>2.</td>
+              <td>Password</td>
+              <td>
+                  {{dataDetail.Password}}
+              </td>
+              
+            </tr>
+            <tr>
+              <td>3.</td>
+              <td>HakAkses</td>
+              <td>
+                  {{dataDetail.HakAkses}}
+              </td>
+            
+           
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+     

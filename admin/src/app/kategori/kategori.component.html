@@ -1,0 +1,42 @@
+<div class="col-md-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Data Akun</h3>
+
+        <div class="box-tools pull-right">
+          <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Akun</span></a>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body" >
+  
+              <table id="example"   class="table table-striped table-bordered" *ngIf="this.temp_var">
+                      <thead>
+                        <tr>
+                            <th>Kode Kategori</th>
+                            <th>Nama Kategori</th>
+                   
+                            <th data-orderable="false">Aksi</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let rec of this.dataKategori">
+                           
+                            <td>{{rec.KdKategori}}</td>
+                            <td>{{rec.NamaKategori}}</td>
+                         
+                            <td>
+                                  <a class ="label label-info" [routerLink]="['./edit/'+rec._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                                  <a class ="label label-danger" (click)= "kategoriDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
+                            </td>
+                           
+                          </tr>
+                       
+                      </tbody>
+                    </table>
+
+              
+      <!-- ./box-body -->
+      </div>
+      <!-- /.box-footer -->
+    </div>

@@ -1,0 +1,79 @@
+
+<div class="col-md-10">
+  <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Data Barang</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table" *ngIf="dataDetail">
+          <tr>
+            <th style="width: 10px">#</th>
+            <th>Atribut</th>
+            <th>Detail</th>
+            
+          </tr>
+          <tr >
+            <td>1.</td>
+            <td>Kode Barang</td>
+            <td>{{dataDetail.KdBarang}}
+                
+            </td>
+           
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>Nama Barang</td>
+            <td>
+                {{dataDetail.NamaBarang}}
+            </td>
+            
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>Kode Kategori</td>
+            <td>
+                {{dataDetail.KdKategori}}
+            </td>
+          
+          </tr>
+          <tr >
+            <td>4.</td>
+            <td>Harga Sewa</td>
+            <td>
+                {{dataDetail.HargaSewa}}
+            </td>
+         
+          </tr>
+          <tr>
+              <td>5.</td>
+              <td>Status Barang</td>
+              <td>
+                  {{dataDetail.StatusBarang}}
+              </td>
+             
+            </tr>
+
+            <tr >
+              <td>6.</td>
+              <td>Jumlah Barang</td>
+              <td>
+                  {{dataDetail.JumlahBarang}}
+              </td>
+             
+            </tr>
+
+            <tr>
+              <td>7.</td>
+              <td>Harga Denda</td>
+              <td>
+                  {{dataDetail.HargaDenda}}
+              </td>
+             
+            </tr>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+  </div>
+   
