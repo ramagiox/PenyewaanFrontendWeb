@@ -1,0 +1,446 @@
+<div class="container">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profil" role="tab" aria-controls="home" aria-selected="true">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#rent" role="tab" aria-controls="profile" aria-selected="false">Rent Status</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#book" role="tab" aria-controls="contact" aria-selected="false">Booking Status</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#denda" role="tab" aria-controls="contact" aria-selected="false">Fine</a>
+      </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="profil" role="tabpanel" aria-labelledby="home-tab" *ngIf="dataPenyewa">
+      <div class="card-body">
+        
+          <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label">Full Name</label>
+            <div class="col-4">
+             <a>: {{dataPenyewa.NamaPenyewa}}</a>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label">Email</label>
+            <div class="col-4">
+              : {{dataPenyewa.EmailPenyewa}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label">Home Address</label>
+            <div class="col-4">
+              : {{dataPenyewa.AlamatPenyewa}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-search-input" class="col-2 col-form-label">Phone Number</label>
+            <div class="col-4">
+              : {{dataPenyewa.NoTelp}}
+            </div>
+          </div>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          
+          <button type="submit" class="btn  btn-primary " style="float: inherit;"
+           (click)="dataProfile(dataPenyewa._id)"data-toggle="modal" data-target="#profiledit"
+          > Edit</button>
+       
+        </div>
+        
+       
+    </div>
+    <div class="tab-pane fade" id="rent" role="tabpanel" aria-labelledby="profile-tab">
+      <table class="table">
+        <thead>
+            <tr>
+                <td>
+                  <h5>Rent Code</h5>
+                </td>
+                <td>
+                    <h5>Item Code</h5>
+                </td>
+                <td>
+                  <h5>Quantity</h5>
+              </td>
+               
+                <td>
+                  <h5>Rent Date</h5>
+              </td>
+              <td>
+                <h5>Return Date</h5>
+            </td>
+            <td>
+                <h5>Action</h5>
+            </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of dataSewa">
+                <td>
+                    {{item.KdDataSewa}}
+                </td>
+                <td>
+                    {{item.KdBarang}}
+                </td>
+                <td>
+                    {{item.JumlahBarang}}
+                </td>
+               
+                <td>
+                    {{getDateFormat(item.TglMulai)|date:'yyyy-MM-dd'}}
+                </td>
+                <td>
+                    {{getDateFormat(item.TglSelesai)|date:'yyyy-MM-dd'}}
+                </td>
+                <td>
+                    
+                    <a class="btn btn-success"  (click)="rentDetail(item)"  data-toggle="modal" data-target="#rentdetail"><span class="fa fa-search"></span></a>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="contact-tab">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                      <h5>Rent Code</h5>
+                    </td>
+                    <td>
+                        <h5>Item Code</h5>
+                    </td>
+                    <td>
+                      <h5>Quantity</h5>
+                  </td>
+                   
+                    <td>
+                      <h5>Rent Date</h5>
+                  </td>
+                  <td>
+                    <h5>Return Date</h5>
+                </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataSewaBook">
+                    <td>
+                        {{item.KdDataSewa}}
+                    </td>
+                    <td>
+                        {{item.KdBarang}}
+                    </td>
+                    <td>
+                        {{item.JumlahBarang}}
+                    </td>
+                   
+                    <td>
+                        {{getDateFormat(item.TglMulai)|date:'yyyy-MM-dd'}}
+                    </td>
+                    <td>
+                        {{getDateFormat(item.TglSelesai)|date:'yyyy-MM-dd'}}
+                    </td>
+                    <td>
+    
+                        <!-- <a class="btn btn-success" href [routerLink]="['/dokter/detail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
+                        <a class="btn btn-info" href [routerLink]="['/dokter/edit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>-->
+                        <button class="btn btn-danger" (click)="datasewaDelete(item._id,item.KdBarang)" type="button" ><span class="fa fa-trash"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="denda" role="tabpanel" aria-labelledby="home-tab">
+        <table class="table">
+            <thead>
+                <tr>
+                    <tr>
+                        <td>
+                          <h5>Rent Code</h5>
+                        </td>
+                        <td>
+                            <h5>Item Code</h5>
+                        </td>
+                        <td>
+                          <h5>Quantity</h5>
+                      </td>
+                       
+                        <td>
+                          <h5>Rent Date</h5>
+                      </td>
+                      <td>
+                        <h5>Return Date</h5>
+                    </td>
+                    <td>
+                        <h5>Action</h5>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataSewaLate">
+                    <td>
+                        {{item.KdDataSewa}}
+                    </td>
+                    <td>
+                        {{item.KdBarang}}
+                    </td>
+                    <td>
+                        {{item.JumlahBarang}}
+                    </td>
+                   
+                    <td>
+                        {{getDateFormat(item.TglMulai)|date:'yyyy-MM-dd'}}
+                    </td>
+                    <td>
+                        {{getDateFormat(item.TglSelesai)|date:'yyyy-MM-dd'}}
+                    </td>
+                    <td>
+                        
+                        <a class="btn btn-success" (click)="fineDetail(item)"  data-toggle="modal" data-target="#finedetail"><span class="fa fa-search"></span></a>
+                        
+                    </td>
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
+
+
+<!-- Profil Edit -->
+
+<div class="modal fade" id="profiledit" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <form nama="akunedit" action="" class="form-horizontal" *ngIf="dataEdit">
+
+            <div class="col-md-12">
+              <div class="box box-primary">
+                <div class="box-header">
+                  <h3 class="box-title">Profile Edit</h3>
+                </div>
+                <div class="box-body">
+                  <div class="col-sm-12 form-group">
+                    <label for="inputEmail3" class="control-label">Full Name</label>
+
+                    <input name="NamaPenyewa" [(ngModel)]="dataEdit.NamaPenyewa" type="text" class="form-control" placeholder="">
+
+                  </div>
+
+                  <div class="col-sm-12 form-group">
+                    <label for="inputEmail3" class=" control-label">Email</label>
+
+                    <input name="EmailPenyewa" [(ngModel)]="dataEdit.EmailPenyewa" type="text" class="form-control" placeholder="">
+
+                  </div>
+
+                  <div class="col-sm-12 form-group">
+                    <label for="inputEmail3" class=" control-label">Home Address</label>
+
+                    <input name="AlamatPenyewa" [(ngModel)]="dataEdit.AlamatPenyewa" type="text" class="form-control" placeholder="">
+
+                  </div>
+
+                  <div class="col-sm-12 form-group">
+                    <label for="inputEmail3" class=" control-label">Phone Number</label>
+
+                    <input name="NoTelp" [(ngModel)]="dataEdit.NoTelp" type="text" class="form-control" placeholder="">
+
+                  </div>
+
+
+                  <div class="col-sm-12 form-group">
+                    <button class="btn btn-success" (click)="profileEdit(dataEdit._id,dataEdit)" type="submit" style="float:right;"> Save </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  Rent Modal -->
+
+  <div class="modal fade" id="rentdetail" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title" id="modaldetailtitle">Data Barang</h4>
+        </div>
+        <div class="modal-body">
+
+            <table class="table" *ngIf="dataRentDetail">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Atribut</th>
+                  <th>Detail</th>
+                  
+                </tr>
+               
+                <tr>
+                  <td>1.</td>
+                  <td>Tanggal Pembayaran</td>
+                  <td>
+                      {{dataRentDetail.TglPembayaran}}
+                  </td>
+                  
+                </tr>
+                <tr>
+                  <td>2.</td>
+                  <td>Harga Total</td>
+                  <td>
+                      {{dataRentDetail.HargaTotal}}
+                  </td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>Status Pembayaran</td>
+                    <td>
+                        {{dataRentDetail.StatusPembayaran}}
+                    </td>
+                  </tr>
+    
+                  <tr>
+                      <td>4.</td>
+                      <td>Username Penyewa</td>
+                      <td>
+                          {{dataRentDetail.UserNamePenyewa}}
+                      </td>
+                    </tr>
+    
+                    <tr>
+                        <td>5.</td>
+                        <td>Kode Data Sewa</td>
+                        <td>
+                            {{dataRentDetail.KdDataSewa}}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>6.</td>
+                        <td>Tanggal Mulai</td>
+                        <td>
+                            {{getDateFormat(dataItemDetail.TglMulai)|date:'yyyy-MM-dd'}}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>7.</td>
+                        <td>Tanggal Selesai</td>
+                        <td>
+                            {{getDateFormat(dataItemDetail.TglSelesai)|date:'yyyy-MM-dd'}}
+                        </td>
+                      </tr>
+               
+              </table>
+              </div>
+
+
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fine Modal -->
+
+  <div class="modal fade" id="finedetail" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title" id="modaldetailtitle">Data Barang</h4>
+        </div>
+        <div class="modal-body">
+
+            <table class="table" *ngIf="dataFineDetail">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Atribut</th>
+                  <th>Detail</th>
+                  
+                </tr>
+
+                <tr>
+                    <td>1.</td>
+                    <td>Kode Data Sewa</td>
+                    <td>
+                        {{dataFineDetail.KdDataSewa}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>2.</td>
+                    <td>Status</td>
+                    <td>
+                        {{dataFineDetail.StatusDataSewa}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3.</td>
+                    <td>Jumlah Barang</td>
+                    <td>
+                        {{dataFineDetail.JumlahBarang}}
+                    </td>
+                  </tr>                   
+
+                      <tr>
+                        <td>4.</td>
+                        <td>Tanggal Mulai</td>
+                        <td>
+                            {{getDateFormat(dataFineDetail.TglMulai)|date:'yyyy-MM-dd'}}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>5.</td>
+                        <td>Tanggal Selesai</td>
+                        <td>
+                            {{getDateFormat(dataFineDetail.TglSelesai)|date:'yyyy-MM-dd'}}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>6.</td>
+                        <td>Denda</td>
+                        <td>
+                            {{denda}}
+                        </td>
+                      </tr>
+               
+              </table>
+              </div>
+
+
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

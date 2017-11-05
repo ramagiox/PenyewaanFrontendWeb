@@ -1,0 +1,48 @@
+<!-- Page Content -->
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-3">
+
+      
+
+    </div>
+    <!-- /.col-lg-3 -->
+
+    <div class="col-lg-12">
+
+      <div class="card mt-4" *ngIf="dataBarang">
+        <img class="card-img-top img-fluid" src={{dataBarang.Foto}} alt="">
+        <div class="card-body">
+          <h3 class="card-title">{{dataBarang.NamaBarang}}</h3>
+          <h4>{{dataBarang.HargaSewa}} IDR / Day</h4>
+          <p class="card-text">Item Status : {{dataBarang.StatusBarang}}</p>
+          <p class="card-text">Item Stock : {{dataBarang.JumlahBarang}}
+            <button type="button" 
+            class="btn btn-primary btn-lg" 
+            style="float: right;" 
+           (click)="cekBarang()"
+            >Rent Now!</button>
+          </p>
+
+        </div>
+      </div>
+      <!-- /.card -->
+
+      <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+          Same Category
+        </div>
+
+      </div>
+      <!-- /.card -->
+
+
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->

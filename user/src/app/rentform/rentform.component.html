@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="col-lg-10" *ngIf="dataBarang">
+    <h1>Rent Form > <a [routerLink]="['/item/detail/',dataBarang._id]">{{dataBarang.NamaBarang}}</a></h1>
+    <div class="card mt-4">
+      <div class="card-body">
+        <form (ngSubmit)="rentCreate(dataRent,dataBarang)" class="form-horizontal">
+          <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label">Item Name</label>
+            <div class="col-10">
+              <input class="form-control" type="text" name="namabarang" [(ngModel)]="dataBarang.NamaBarang" disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label">Rental Price / Day</label>
+            <div class="col-10">
+              <input class="form-control" type="text" name="hargasewa" [(ngModel)]="dataBarang.HargaSewa" disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label">Item Stock</label>
+            <div class="col-10">
+              <input class="form-control" type="text" name="stok" [(ngModel)]="dataBarang.JumlahBarang" id="example-text-input" disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-search-input" class="col-2 col-form-label">Number of Rental Items</label>
+            <div class="col-10">
+              <input class="form-control" type="number" [(ngModel)]="dataRent.JumlahBarang" min=1 (change)="setJumlah()" name="jumlah" id="jumlah">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-email-input" class="col-2 col-form-label">Rental Date</label>
+            <div class="col-10">
+              <input class="form-control" min={{this.minDate11}} (change)="setDate(dataRent.TglMulai)" type="date" name="tanggalmulai" [(ngModel)]="dataRent.TglMulai" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-url-input" class="col-2 col-form-label">Return Date</label>
+            <div class="col-10">
+              <input class="form-control" type="date" [(ngModel)]="dataRent.TglSelesai" name="tanggalselesai" id="tanggalselesai" required>
+            </div>
+          </div>
+          <input type="submit" class="btn  btn-primary" style="float: right;" value="Rent"/>
+        </form>
+        </div>
+     
+    </div>
+    &nbsp;
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </div>
+</div>
