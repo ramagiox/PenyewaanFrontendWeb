@@ -30,17 +30,40 @@ export class PegawaieditComponent implements OnInit {
 
     // }
     }
-    pegawaiEdit(id){
+    pegawaiEdit(id,dataEdit){
       // if (document.cookie=="") {
       //   window.location.href='./login';
       // }else{
     
-      
-        this.http.put('https://penyewaanbatch124.herokuapp.com/api/pegawai/'+this.id,this.dataEdit)
+        let x = dataEdit.UserNamePegawai;
+        let y = dataEdit.PasswordPegawai;
+        let z = dataEdit.NamaPegawai;
+        let a = dataEdit.AlamatPegawai;
+        let b = dataEdit.NoTelp;
+        let number = /^[0-9]+$/;
+        let re = /^\w+$/;
+
+        if (x=="" || y=="" || z=="" || a=="" || b=="") {
+          alert("data harus diisi semua")
+        }else if (!re.test(x)) {
+          alert("username hanya boleh berisi huruf, angka dan underscores (_)");
+        }else if (y.length < 6) {
+          alert("password minimal 6 karakter");
+        }else if (!number.test(b)) {
+          alert("No Telp harus angka")
+        }else if (b.length!=12) {
+          alert("No Telp harus 12 digit")
+        
+      }else{
+        this.http.put('https://penyewaanbatch124.herokuapp.com/api/pegawai/'+id,dataEdit)
         .subscribe((res:Response)=>{
          window.location.href='./pegawai';
          debugger;
         })
+
+      }
+      
+        
      
     // }
     }

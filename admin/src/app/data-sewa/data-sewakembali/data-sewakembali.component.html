@@ -1,0 +1,104 @@
+
+<div class="col-md-10">
+  <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Data Sewa</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table" *ngIf="dataDetail">
+          <tr>
+            <th style="width: 10px">#</th>
+            <th>Atribut</th>
+            <th>Detail</th>
+            
+          </tr>
+          <tr >
+            <td>1.</td>
+            <td>Kode Data Sewa</td>
+            <td>{{dataDetail.KdDataSewa}}
+                
+            </td>
+           
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>Username Pegawai</td>
+            <td>
+                {{dataDetail.UserNamePegawai}}
+            </td>
+            
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>Username Penyewa</td>
+            <td>
+                {{dataDetail.UserNamePenyewa}}
+            </td>
+          
+          </tr>
+          <tr >
+            <td>4.</td>
+            <td>Kode Barang</td>
+            <td>
+                {{dataDetail.KdBarang}}
+            </td>
+         
+          </tr>
+          <tr>
+              <td>5.</td>
+              <td>Status Sewa</td>
+              <td>
+                  {{dataDetail.StatusDataSewa}}
+              </td>
+             
+            </tr>
+
+            <tr >
+              <td>6.</td>
+              <td>Tanggal Mulai</td>
+              <td>
+                  {{dataDetail.TglMulai}}
+              </td>
+             
+            </tr>
+
+            <tr>
+              <td>7.</td>
+              <td>Tanggal Selesai</td>
+              <td>
+                  {{dataDetail.TglSelesai}}
+              </td>
+            </tr>
+            <tr>
+                <td>8.</td>
+                <td>Jumlah Barang</td>
+                <td>
+                    {{dataDetail.JumlahBarang}}
+                </td>
+               
+              </tr>
+              <tr>
+                <td>9.</td>
+                <td>Denda</td>
+                <td>
+                    {{denda}}
+                </td>
+               
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <button class="btn btn-success" type="submit" style="float:right;" (click)= "datasewaKembali(dataDetail._id)"> Submit </button>
+                </td>
+               
+              </tr>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+  </div>
+
+  
+   

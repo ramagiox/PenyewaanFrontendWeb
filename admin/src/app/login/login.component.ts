@@ -23,21 +23,20 @@ export class LoginComponent implements OnInit {
     userLogin(dataLogin){
       let x = document.forms["inputlogin"]["UserName"].value;
       let y = document.forms["inputlogin"]["Password"].value;
+      
       let re = /^\w+$/;
       if (x == "" || y=="") {
         alert("username dan password harus diisi");
-    }else if (!re.test(x)) {
-      alert("Error: Username must contain only letters, numbers and underscores!");
-    }else if (y.length < 6) {
-      alert("Error: Password must contain at least six characters!");
     }else{
      
         let header = new Headers({'Content-Type':'application/json'});
         let opsi = new RequestOptions({headers:header});
         let data = JSON.stringify(this.dataLogin);
-        this.http.post('https://rsegi.herokuapp.com/api/login/authenticate/',data,opsi)
+        this.http.post('https://penyewaanbatch124.herokuapp.com/api/login/pegawai/authenticate/',data,opsi)
         .subscribe((res:Response)=>{
-          document.cookie = "token="+res.json().token;
+          localStorage.setItem("token",res.json());
+          localStorage.setItem("username",this.dataLogin.UserNamePegawai)
+          console.log(localStorage.getItem("token"))
           window.location.href='./';
           debugger;
         })

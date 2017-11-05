@@ -42,7 +42,7 @@ export class DendaaddComponent implements OnInit {
         let header = new Headers({'Content-Type':'application/json'});
         let opsi = new RequestOptions({headers:header});
         let data = JSON.stringify(this.dataDenda);
-        this.http.post('https://penyewaanbatch124.herokuapp.com/api/denda',data,opsi)
+        this.http.post('https://penyewaanbatch124.herokuapp.com/api/denda?token='+localStorage.getItem("token"),data,opsi)
         .subscribe((res:Response)=>{
           window.location.href='./denda';
           debugger;

@@ -7,4 +7,5 @@ export class Data {
     public StatusBarang : string;
     public JumlahBarang : Number;
     public HargaDenda : Number;
+    public Foto : String;
 }

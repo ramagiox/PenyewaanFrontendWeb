@@ -4,7 +4,7 @@
       <h3 class="box-title">Data Penyewa</h3>
 
       <div class="box-tools pull-right">
-        <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Penyewa</span></a>
+        <a class ="btn btn-sm btn-info btn-flat" (click)= "tambahPenyewa()" data-toggle="modal" data-target="#penyewatambah"><span> Tambah Penyewa</span></a>
       </div>
     </div>
     <!-- /.box-header -->
@@ -13,7 +13,7 @@
             <table id="penyewa"   class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                          <th>Kode Penyewa</th>
+                         
                           <th>Username</th>
                           <th>Nama Penyewa</th>
                           <th>Email Penyewa</th>
@@ -23,13 +23,13 @@
                     <tbody>
                       <tr *ngFor="let rec of this.dataPenyewa">
                          
-                          <td>{{rec.KdPenyewa}}</td>
-                          <td>{{rec.UserName}}</td>
+                          
+                          <td>{{rec.UserNamePenyewa}}</td>
                           <td>{{rec.NamaPenyewa}}</td>
                           <td>{{rec.EmailPenyewa}}</td>
                           <td>
-                                <a class ="label label-success" [routerLink]="['./detail/'+rec._id]"><span class="glyphicon glyphicon-search"></span></a>
-                                <a class ="label label-info" [routerLink]="['./edit/'+rec._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class ="label label-success" (click)= "penyewaDetailModal(rec._id)" data-toggle="modal" data-target="#penyewadetail"><span class="glyphicon glyphicon-search"></span></a>
+                                <a class ="label label-info" (click)= "penyewaDetailModal(rec._id)" data-toggle="modal" data-target="#penyewaedit"><span class="glyphicon glyphicon-pencil"></span></a>
                                 <a class ="label label-danger" (click)= "penyewaDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
                           </td>
                          
@@ -44,3 +44,234 @@
     </div>
     <!-- /.box-footer -->
   </div>
+
+
+<!-- Penyewa Detail -->
+<div class="modal fade" id="penyewadetail" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title" id="modaldetailtitle">Data Barang</h4>
+        </div>
+        <div class="modal-body">
+           
+            <!-- <div class="col-md-10">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Data Barang</h3>
+                    </div>
+                    
+                    <div class="box-body"> -->
+                        <table class="table" *ngIf="dataDetail">
+                            <tr>
+                              <th style="width: 10px">#</th>
+                              <th>Atribut</th>
+                              <th>Detail</th>
+                              
+                            </tr>
+                            <tr >
+                              <td>1.</td>
+                              <td>Username</td>
+                              <td>{{dataDetail.UserNamePenyewa}}
+                                  
+                              </td>
+                             
+                            </tr>
+                            <tr>
+                              <td>2.</td>
+                              <td>Password</td>
+                              <td>
+                                  {{dataDetail.PasswordPenyewa}}
+                              </td>
+                              
+                            </tr>
+                            <tr>
+                              <td>3.</td>
+                              <td>Nama Penyewa</td>
+                              <td>
+                                  {{dataDetail.NamaPenyewa}}
+                              </td>
+                            
+                            </tr>
+                            <tr >
+                              <td>4.</td>
+                              <td>Email Penyewa</td>
+                              <td>
+                                  {{dataDetail.EmailPenyewa}}
+                              </td>
+                           
+                            </tr>
+                            <tr>
+                                <td>5.</td>
+                                <td>Alamat Penyewa</td>
+                                <td>
+                                    {{dataDetail.AlamatPenyewa}}
+                                </td>
+                               
+                              </tr>
+                  
+                              <tr >
+                                <td>6.</td>
+                                <td>No Telp</td>
+                                <td>
+                                    {{dataDetail.NoTelp}}
+                                </td>
+                               
+                              </tr>
+                  
+                          </table>
+              </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Penyewa Edit -->
+
+  <div class="modal fade" id="penyewaedit" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+              <form nama="penyewaedit"  action ="" class="form-horizontal" *ngIf="dataEdit">
+                  
+                      <div class="col-md-12">
+                          <div class="box box-primary">
+                            <div class="box-header">
+                              <h3 class="box-title">Penyewa Edit</h3>
+                            </div>
+                            <div class="box-body">
+                    <div class="col-sm-12 form-group" >
+                      <label for="inputEmail3" class="control-label">Username</label>
+                      
+                        <input disabled name= "UserNamePenyewa" [(ngModel)]="dataEdit.UserNamePenyewa" type="text" class="form-control"  placeholder="">
+                      
+                    </div>
+                  
+                    <div class="col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Password</label>
+                          
+                              <input name = "PasswordPenyewa" [(ngModel)]="dataEdit.PasswordPenyewa" type="password" class="form-control"  placeholder="">
+                          
+                          </div>
+                  
+                  
+                          <div class="col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Nama Penyewa</label>
+                           
+                              <input name = "NamaPenyewa" [(ngModel)]="dataEdit.NamaPenyewa" type="text" class="form-control"  placeholder="">
+                           
+                          </div>
+                
+                          <div class="col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Email Penyewa</label>
+                           
+                              <input name = "EmailPenyewa" [(ngModel)]="dataEdit.EmailPenyewa" type="text" class="form-control"  placeholder="">
+                          
+                          </div>
+                
+                          <div class=" col-sm-12 form-group">
+                            <label for="inputEmail3" class=" control-label">Alamat Penyewa</label>
+                        
+                              <input name = "AlamatPenyewa" [(ngModel)]="dataEdit.AlamatPenyewa" type="text" class="form-control"  placeholder="">
+                           
+                          </div>
+                
+                          <div class=" col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">No Telp</label>
+                           
+                              <input name = "NoTelp" [(ngModel)]="dataEdit.NoTelp" type="text" class="form-control"  placeholder="">
+                        
+                          </div>
+                  
+                         
+                          
+                          <button class="btn btn-success" (click)= "penyewaEdit(dataEdit._id,dataEdit)" type="submit" style="float:right;"> Save </button>
+                          </div>
+                          </div>
+                          </div>
+                  </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Penyewa Tambah -->
+
+    <div class="modal fade" id="penyewatambah" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle" *ngIf="dataPenyewaTambah">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            
+              
+                <form name="penyewaadd" (ngSubmit)="createPenyewa(dataPenyewaTambah)" class="form-horizontal" >
+                    
+                    <div class="col-md-12">
+                      <div class="box box-primary">
+                        <div class="box-header">
+                          <h3 class="box-title">Tambah Penyewa</h3>
+                        </div>
+                        <div class="box-body">
+                      <div class=" col-sm-12 form-group">
+                        <label for="inputEmail3" class="control-label">Username</label>
+                    
+                          <input name ="UserNamePenyewa" [(ngModel)]="dataPenyewaTambah.UserNamePenyewa"  type="text" class="form-control" id="inputEmail3" placeholder="Username">
+                     
+                      </div>
+
+                      <div class=" col-sm-12 form-group">
+                        <label for="inputEmail3" class="  control-label">Password</label>
+                    
+                          <input name ="PasswordPenyewa" [(ngModel)]="dataPenyewaTambah.PasswordPenyewa"  type="password" class="form-control" id="inputEmail3" placeholder="Password">
+                      
+                      </div>
+                    
+                      <div class=" col-sm-12 form-group">
+                              <label for="inputEmail3" class="  control-label">Nama Penyewa</label>
+                            
+                                <input name ="NamaPenyewa" [(ngModel)]="dataPenyewaTambah.NamaPenyewa"  type="text" class="form-control" id="inputEmail3" placeholder="Nama Penyewa">
+                             
+                            </div>
+                  
+                            
+                  
+                            <div class=" col-sm-12 form-group">
+                              <label for="inputEmail3" class="  control-label">Email Penyewa</label>
+                             
+                                <input name ="EmailPenyewa" [(ngModel)]="dataPenyewaTambah.EmailPenyewa"  type="text" class="form-control" id="inputEmail3" placeholder="Email Penyewa">
+                            
+                            </div>
+                  
+                  
+                            <div class=" col-sm-12 form-group">
+                              <label for="inputEmail3" class="  control-label">Alamat Penyewa</label>
+                          
+                                <input name ="AlamatPenyewa" [(ngModel)]="dataPenyewaTambah.AlamatPenyewa"  type="text" class="form-control" id="inputEmail3" placeholder="Alamat Penyewa">
+                             
+                            </div>
+                  
+                            <div class=" col-sm-12 form-group">
+                              <label for="inputEmail3" class="  control-label">No Telp</label>
+                            
+                                <input name ="NoTelp" [(ngModel)]="dataPenyewaTambah.NoTelp"  type="text" class="form-control" id="inputEmail3" placeholder="No Telp">
+                             
+                            </div>
+                  
+                  
+                            
+                            <div class=" col-sm-12 form-group">
+                            <button class="btn btn-success" type="submit" style="float:right;"> Save </button>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                     
+                    </form>
+
+            
+          </div>
+        </div>
+      </div>

@@ -6,12 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./indexsidebar.component.css']
 })
 export class IndexsidebarComponent implements OnInit {
+ 
+  constructor() {
 
-  constructor() { }
+   }
 
   ngOnInit() {
-    
-
+    if(localStorage.getItem("token")==""||localStorage.getItem("token")==null){
+      document.getElementById("sideul").setAttribute("style","display:none");
+    } else{
+      document.getElementById("sideul").setAttribute("style","display:block");
+    }
+   
   }
 
   logout(){

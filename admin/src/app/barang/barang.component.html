@@ -4,7 +4,7 @@
                   <h3 class="box-title">Data Barang</h3>
     
                   <div class="box-tools pull-right">
-                    <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Barang</span></a>
+                    <a class ="btn btn-sm btn-info btn-flat" (click)= "barangTambah()" data-toggle="modal" data-target="#barangtambah"><span> Tambah Barang</span></a>
                   </div>
                 </div>
                 <!-- /.box-header -->
@@ -14,9 +14,9 @@
                                 <thead>
                                   <tr>
                                       <th>Nama Barang</th>
-                                      <th>Kode Kategori</th>
+                                      <th>Nama Kategori</th>
                                       <th>Jumlah Barang</th>
-                                      <th>Harga Sewa</th>
+                                      <th>Harga Sewa (/hari)</th>
                                       <th data-orderable="false">Aksi</th>
                                 </tr>
                                 </thead>
@@ -24,11 +24,11 @@
                                   <tr *ngFor="let rec of this.dataBarang">
                                      
                                       <td>{{rec.NamaBarang}}</td>
-                                      <td>{{rec.KdKategori}}</td>
+                                      <td>{{rec.KategoriInfo.NamaKategori}}</td>
                                       <td>{{rec.JumlahBarang}}</td>
                                       <td>{{rec.HargaSewa}}</td>
                                       <td>
-                                            <a class ="label label-success" [routerLink]="['./detail/'+rec._id]"><span class="glyphicon glyphicon-search"></span></a>
+                                            <a class ="label label-success" (click)= "barangmodal(rec._id)" data-toggle="modal" data-target="#modaldetail"><span class="glyphicon glyphicon-search"></span></a>
                                             <a class ="label label-info" (click)= "barangmodal(rec._id)" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-pencil"></span></a>
                                             <a class ="label label-danger" (click)= "barangDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
                                       </td>
@@ -44,85 +44,251 @@
                 <!-- /.box-footer -->
               </div>
 
-              
-      
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <!-- Barang Detail Modal -->
+
+              <div class="modal fade" id="modaldetail" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                        
+                        <h4 class="modal-title" id="modaldetailtitle">Data Barang</h4>
                       </div>
                       <div class="modal-body">
-                          <form   action ="" class="form-horizontal" *ngIf="dataEdit">
-                              
-                                  <div class="col-md-12">
-                                      <div class="box box-primary">
-                                        <div class="box-header">
-                                          <h3 class="box-title">Barang Edit</h3>
-                                        </div>
-                                        <div class="box-body">
-                                <div class="form-group" >
-                                  <label for="inputEmail3" class="col-sm-2 control-label">Kode Barang</label>
-                                  <div class="col-sm-10">
-                                    <input  name= "KdBarang" [(ngModel)]="dataEdit.KdBarang" type="text" class="form-control"  placeholder="">
+                         
+                          <!-- <div class="col-md-10">
+                              <div class="box box-info">
+                                  <div class="box-header with-border">
+                                    <h3 class="box-title">Data Barang</h3>
                                   </div>
-                                </div>
-                              
-                                <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Nama Barang</label>
-                                        <div class="col-sm-10">
-                                          <input name = "NamaBarang" [(ngModel)]="dataEdit.NamaBarang" type="text" class="form-control"  placeholder="">
-                                        </div>
-                                      </div>
-                              
-                                      <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Kode Kategori</label>
-                                        <div class="col-sm-10">
-                                          <select class="form-control" [(ngModel)]="dataEdit.KdKategori" [ngModelOptions]="{standalone: true}">  
-                                            <option value="0" selected="selected">--Select Kategori--</option>  
-                                            <option selected="selected" *ngFor="let item of KategoriBarang" value={{item.KdKategori}}>{{item.NamaKategori}}</option>  
-                                            </select>
-                                        </div>
-                                      </div>
-                              
-                                      <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Harga Sewa</label>
-                                        <div class="col-sm-10">
-                                          <input name = "HargaSewa" [(ngModel)]="dataEdit.HargaSewa" type="text" class="form-control"  placeholder="">
-                                        </div>
-                                      </div>
+                                  
+                                  <div class="box-body"> -->
+                                    <table class="table" *ngIf="dataDetail">
+                                      <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Atribut</th>
+                                        <th>Detail</th>
+                                        
+                                      </tr>
+                                      <tr >
+                                        <td>1.</td>
+                                        <td>Kode Barang</td>
+                                        <td>{{dataDetail.KdBarang}}
+                                            
+                                        </td>
+                                       
+                                      </tr>
+                                      <tr>
+                                        <td>2.</td>
+                                        <td>Nama Barang</td>
+                                        <td>
+                                            {{dataDetail.NamaBarang}}
+                                        </td>        
+                                      </tr>
+                                      <tr>
+                                        <td>3.</td>
+                                        <td>Kode Kategori</td>
+                                        <td>
+                                            {{dataDetail.KdKategori}}
+                                        </td>
+                                      
+                                      </tr>
+                                      <tr >
+                                        <td>4.</td>
+                                        <td>Harga Sewa (/hari)</td>
+                                        <td>
+                                            {{dataDetail.HargaSewa}}
+                                        </td>
+                                     
+                                      </tr>
+                                      <tr>
+                                          <td>5.</td>
+                                          <td>Status Barang</td>
+                                          <td>
+                                              {{dataDetail.StatusBarang}}
+                                          </td>
+                                         
+                                        </tr>
                             
-                                      <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Status Barang</label>
-                                        <div class="col-sm-10">
-                                          <input name = "StatusBarang" [(ngModel)]="dataEdit.StatusBarang" type="text" class="form-control"  placeholder="">
-                                        </div>
-                                      </div>
+                                        <tr >
+                                          <td>6.</td>
+                                          <td>Jumlah Barang</td>
+                                          <td>
+                                              {{dataDetail.JumlahBarang}}
+                                          </td>
+                                         
+                                        </tr>
                             
-                                      <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Jumlah Barang</label>
-                                        <div class="col-sm-10">
-                                          <input name = "JumlahBarang" [(ngModel)]="dataEdit.JumlahBarang" type="text" class="form-control"  placeholder="">
-                                        </div>
-                                      </div>
-                            
-                                      <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Harga Denda</label>
-                                        <div class="col-sm-10">
-                                          <input name = "HargaDenda" [(ngModel)]="dataEdit.HargaDenda" type="text" class="form-control"  placeholder="">
-                                        </div>
-                                      </div>                                     
-                                      <button class="btn btn-success" (click)= "barangEdit(dataEdit._id)" type="submit" style="float:right;"> Save </button>
-                                      </div>
-                                      </div>
-                                      </div>
-                              </form>
-                      </div>
+                                        <tr>
+                                          <td>7.</td>
+                                          <td>Harga Denda (/hari)</td>
+                                          <td>
+                                              {{dataDetail.HargaDenda}}
+                                          </td>
+                                         
+                                        </tr>
+
+                                        <tr>
+                                            <td>8.</td>
+                                            <td>Foto</td>
+                                            <td>
+                                                {{dataDetail.Foto}}
+                                            </td>
+                                           
+                                          </tr>
+                                    </table>
+                            </div>
+
+
+                      
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
                       </div>
                     </div>
                   </div>
                 </div>
+
+              <!-- Barang Edit Modal -->
+      
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">Edit Barang</h4>
+                    </div>
+                    <form role="form" *ngIf="dataEdit">
+                      <div class="modal-body">
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="inputEmail3" class="control-label">Kode Barang</label>
+                            <input name="KdBarang" [(ngModel)]="dataEdit.KdBarang" type="text" class="form-control" placeholder="">
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail3" class="control-label">Nama Barang</label>
+                            <input name="NamaBarang" [(ngModel)]="dataEdit.NamaBarang" type="text" class="form-control" placeholder="">
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail3" class="control-label">Kode Kategori</label>
+                            <div>
+                              <select class="form-control" [(ngModel)]="dataEdit.KdKategori" [ngModelOptions]="{standalone: true}">  
+                                            <option value="0" selected="selected">--Select Kategori--</option>  
+                                            <option selected="selected" *ngFor="let item of KategoriBarang" value={{item.KdKategori}}>{{item.NamaKategori}}</option>  
+                                            </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="inputEmail3" class="control-label">Harga Sewa (/hari)</label>
+                            <input name="HargaSewa" [(ngModel)]="dataEdit.HargaSewa" type="text" class="form-control" placeholder="">
+                          </div>
+                          </div>
+
+
+                          <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="inputEmail3" class="control-label">Status Barang</label>
+                            <input name="StatusBarang" [(ngModel)]="dataEdit.StatusBarang" type="text" class="form-control" placeholder="">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="inputEmail3" class="control-label">Jumlah Barang</label>
+
+                            <input name="JumlahBarang" [(ngModel)]="dataEdit.JumlahBarang" type="text" class="form-control" placeholder="">
+                          </div>
+
+                          <div class="form-group">
+
+                            <label for="inputEmail3" class="control-label">Harga Denda (/hari)</label>
+                            <input name="HargaDenda" [(ngModel)]="dataEdit.HargaDenda" type="text" class="form-control" placeholder="">
+                          </div>
+                          <div class="form-group">
+
+                          <label for="inputEmail3" class="control-label">Foto (Link)</label>
+                          <input name="Foto" [(ngModel)]="dataEdit.Foto" type="text" class="form-control" placeholder="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button class="btn btn-success" (click)="barangEdit(dataEdit._id,dataEdit)" type="submit" style="float:right;"> Save </button>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Barang Tambah -->
+
+              <div class="modal fade" id="barangtambah" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle" *ngIf="dataBarangTambah">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="box-title">Tambah Barang</h3>
+                    </div>
+
+                    <form name="barangadd" (ngSubmit)="createBarang(dataBarangTambah)" role="form">
+
+                      <div class="modal-body">
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="inputEmail3" class="control-label">Kode Barang</label>
+                            <input name="KdBarang" [(ngModel)]="dataBarangTambah.KdBarang" type="text" class="form-control" id="inputEmail3" placeholder="Kode Barang">
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail3" class=" control-label">Nama Barang</label>
+
+                            <input name="NamaBarang" [(ngModel)]="dataBarangTambah.NamaBarang" type="text" class="form-control" id="inputEmail3" placeholder="Nama Barang">
+
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail3" class=" control-label">Kode Kategori</label>
+
+                            <select name="KdKategori" class="form-control" [(ngModel)]="dataBarangTambah.KdKategori" [ngModelOptions]="{standalone: true}">  
+                                            <option value="0"selected="selected">--Select Kategori--</option>  
+                                            <option *ngFor="let item of KategoriBarang" value={{item.KdKategori}}>{{item.NamaKategori}}</option>  
+                                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail3" class=" control-label">Harga Sewa (/hari)</label>
+
+                            <input name="HargaSewa" [(ngModel)]="dataBarangTambah.HargaSewa" type="text" class="form-control" id="inputEmail3" placeholder="Harga Sewa">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="inputEmail3" class=" control-label">Status Barang</label>
+
+                            <input name="StatusBarang" [(ngModel)]="dataBarangTambah.StatusBarang" type="text" class="form-control" id="inputEmail3"
+                              placeholder="Status Barang">
+
+                          </div>
+                     
+                          <div class="form-group">
+                            <label for="inputEmail3" class=" control-label">Jumlah Barang</label>
+
+                            <input name="JumlahBarang" [(ngModel)]="dataBarangTambah.JumlahBarang" type="text" class="form-control" id="inputEmail3"
+                              placeholder="Jumlah Barang">
+
+                          </div>
+
+                          <div class="form-group">
+                            <label for="inputEmail3" class=" control-label">Harga Denda (/hari)</label>
+                            <input name="HargaDenda" [(ngModel)]="dataBarangTambah.HargaDenda" type="text" class="form-control" id="inputEmail3" placeholder="Harga Denda">
+                          </div>
+                          <div class="form-group">
+                              <label for="inputEmail3" class=" control-label">Foto (Link)</label>
+                              <input name="Foto" [(ngModel)]="dataBarangTambah.Foto" type="text" class="form-control" id="inputEmail3" placeholder="Link Foto">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-success" type="submit" style="float:right;"> Save </button>
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>

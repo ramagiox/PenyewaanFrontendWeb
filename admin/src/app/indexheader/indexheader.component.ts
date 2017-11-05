@@ -10,27 +10,28 @@ loginout:String
   constructor() { }
 
   ngOnInit() {
-    if (document.cookie=="") {
-      this.loginout = "Login atau Daftar"
-        
+    if (localStorage.getItem("token")=="" || localStorage.getItem("token")==null) {
+        document.getElementById("login").setAttribute("style","display:block")
+        document.getElementById("logout").setAttribute("style","display:none")
       }else{
-        this.loginout = "Logout"
+        document.getElementById("login").setAttribute("style","display:none")
+        document.getElementById("logout").setAttribute("style","display:block")
       }
   }
 
   logout(){
-    if (document.cookie=="") {
-      window.location.href='./login';
+    // if (document.cookie=="") {
+    //   window.location.href='./login';
         
-      }else{
+      // }else{
         if (confirm("yakin mau keluar ?")==true){
-          document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+          localStorage.removeItem("token");
           window.location.href='./';
         }else{
           
         }
         
-      }
+      // }
   }
 
 }

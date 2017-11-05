@@ -11,7 +11,7 @@ import { IndexheaderComponent } from './indexheader/indexheader.component';
 import { IndexfooterComponent } from './indexfooter/indexfooter.component';
 import { IndexsidebarComponent } from './indexsidebar/indexsidebar.component';
 import { LoginComponent } from './login/login.component';
-import { RumahSakitComponent } from './rumah-sakit/rumah-sakit.component';
+// import { RumahSakitComponent} from './rumah-sakit/rumah-sakit.component';
 import { DaftarComponent } from './daftar/daftar.component';
 import { BarangComponent } from './barang/barang.component';
 import { BarangaddComponent } from './barang/barangadd/barangadd.component';
@@ -45,11 +45,13 @@ import { PembayaranComponent } from './pembayaran/pembayaran.component';
 import { PembayaranaddComponent } from './pembayaran/pembayaranadd/pembayaranadd.component';
 import { PembayarandetailComponent } from './pembayaran/pembayarandetail/pembayarandetail.component';
 import { PembayaraneditComponent } from './pembayaran/pembayaranedit/pembayaranedit.component';
+import { DataSewakembaliComponent} from './data-sewa/data-sewakembali/data-sewakembali.component';
+import { SearchComponent } from './search/search.component';
 
 
 let routes : Routes=[
   {path:'login',component:LoginComponent},
-  {path:'',component:RumahSakitComponent},
+  {path : '',component:SearchComponent},
   {path:'daftar',component:DaftarComponent},
   {path:'barang',component:BarangComponent},
   {path:'barang/add',component:BarangaddComponent},
@@ -82,7 +84,8 @@ let routes : Routes=[
   {path:'pembayaran',component:PembayaranComponent},
   {path:'pembayaran/add',component:PembayaranaddComponent},
   {path:'pembayaran/detail/:id',component:PembayarandetailComponent},
-  {path:'pembayaran/edit/:id',component:PembayaraneditComponent}
+  {path:'pembayaran/edit/:id',component:PembayaraneditComponent},
+  {path:'datasewa/kembali/:id',component:DataSewakembaliComponent}
 
 ]
 
@@ -95,7 +98,7 @@ let routes : Routes=[
     IndexfooterComponent,
     IndexsidebarComponent,  
     LoginComponent,
-    RumahSakitComponent,
+    // RumahSakitComponent,
     DaftarComponent,
     BarangComponent,
     BarangaddComponent,
@@ -109,6 +112,7 @@ let routes : Routes=[
     DataSewaaddComponent,
     DataSewadetailComponent,
     DataSewaeditComponent,
+    DataSewakembaliComponent,
     AkunComponent,
     AkunaddComponent,
     AkundetailComponent,
@@ -129,6 +133,7 @@ let routes : Routes=[
     PembayaranaddComponent,
     PembayarandetailComponent,
     PembayaraneditComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

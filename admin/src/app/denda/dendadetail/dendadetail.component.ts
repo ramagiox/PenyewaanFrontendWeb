@@ -22,7 +22,7 @@ export class DendadetailComponent implements OnInit {
     //   window.location.href='./login';
     // }else{
     this.id;
-      this.http.get('https://penyewaanbatch124.herokuapp.com/api/denda/'+this.id)
+      this.http.get('https://penyewaanbatch124.herokuapp.com/api/denda/'+this.id+'?token='+localStorage.getItem("token"))
       .subscribe((res:Response)=>{
         this.dataDetail=res.json();
        

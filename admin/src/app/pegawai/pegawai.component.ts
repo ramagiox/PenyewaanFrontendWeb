@@ -37,11 +37,15 @@ export class PegawaiComponent implements OnInit {
     }
   
     pegawaiDelete(id){
+      if (confirm("apakah anda yakin akan menghapus data ini ?")==true) {
       this.http.delete('https://penyewaanbatch124.herokuapp.com/api/pegawai/'+id)
       .subscribe((res:Response)=>{
         window.location.href='./pegawai';
   
       })
+    }else{
+
+    }
     }
   
   }

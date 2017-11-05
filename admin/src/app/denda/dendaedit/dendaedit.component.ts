@@ -22,7 +22,7 @@ export class DendaeditComponent implements OnInit {
       //   window.location.href='./login';
       // }else{
       this.id;
-      this.http.get('https://penyewaanbatch124.herokuapp.com/api/denda/'+this.id)
+      this.http.get('https://penyewaanbatch124.herokuapp.com/api/denda/'+this.id+'?token='+localStorage.getItem("token"))
       .subscribe((res:Response)=>{
         this.dataEdit=res.json();
         debugger;
@@ -36,7 +36,7 @@ export class DendaeditComponent implements OnInit {
       // }else{
     
       
-        this.http.put('https://penyewaanbatch124.herokuapp.com/api/denda/'+this.id,this.dataEdit)
+        this.http.put('https://penyewaanbatch124.herokuapp.com/api/denda/'+this.id+'?token='+localStorage.getItem("token"),this.dataEdit)
         .subscribe((res:Response)=>{
          window.location.href='./denda';
          debugger;

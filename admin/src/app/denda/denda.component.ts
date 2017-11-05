@@ -25,7 +25,7 @@ export class DendaComponent implements OnInit {
       // }else{
         
         
-        this.http.get('https://penyewaanbatch124.herokuapp.com/api/denda')
+        this.http.get('https://penyewaanbatch124.herokuapp.com/api/denda?token='+localStorage.getItem("token"))
         .subscribe((res:Response) =>{
           this.dataDenda=res.json()
           this.temp_var=true;
@@ -37,11 +37,15 @@ export class DendaComponent implements OnInit {
     }
   
     dendaDelete(id){
-      this.http.delete('https://penyewaanbatch124.herokuapp.com/api/denda/'+id)
+      if (confirm("apakah anda yakin akan menghapus data ini ?")==true) {
+      this.http.delete('https://penyewaanbatch124.herokuapp.com/api/denda/'+id+'?token='+localStorage.getItem("token"))
       .subscribe((res:Response)=>{
         window.location.href='./denda';
   
       })
+    }else {
+
+    }
     }
   
   }

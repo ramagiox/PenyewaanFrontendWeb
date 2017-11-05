@@ -3,7 +3,7 @@ export class Data {
     public KdPembayaran : string;
     public TglPembayaran : Date;
     public HargaTotal : Number;
-    public StatusPembayaran : Number;
-    public KdPenyewa : String;
+    public StatusPembayaran : String;
+    public UserNamePenyewa : String;
     public KdDataSewa : String;
 }

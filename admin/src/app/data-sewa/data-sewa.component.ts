@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Http,Response } from '@angular/http';
+import { Http, Response, Request, Headers, RequestOptions } from '@angular/http';
+import { ActivatedRoute, Routes } from '@angular/router';
 import * as $ from 'jquery';
 import 'datatables.net'
+import { Data } from '../pembayaran/pembayaranadd/pembayaranaddModel';
 
 @Component({
   selector: 'app-data-sewa',
@@ -9,43 +11,175 @@ import 'datatables.net'
   styleUrls: ['./data-sewa.component.css']
 })
 export class DataSewaComponent implements OnInit {
-  dataSewa:Object;
-  id:String;
-  KdSewa:String;
-  public temp_var: Object=false;
-  
-  
-    constructor(private http:Http) { }
-  
-    ngOnInit() {
-      //document.cookie="token=";
-      //document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-      //debugger;
-  
-      // if (document.cookie=="") {
-      //   window.location.href='./login';
-      // }else{
-        
-        
-        this.http.get('https://penyewaanbatch124.herokuapp.com/api/datasewa')
-        .subscribe((res:Response) =>{
-          this.dataSewa=res.json();
-          this.temp_var=true;
-          $(document).ready(function(){
-            $('#example').DataTable();
-            
-        })
-        });
-      // } 
-    }
-  
-    datasewaDelete(id){
-      this.http.delete('https://penyewaanbatch124.herokuapp.com/api/datasewa/'+id)
+  dataSewa: any;
+  id: String;
+  KdSewa: String;
+  dataBarang: any;
+  dataBarangUpdate: any;
+  dataDetail: any;
+  tanggalmulai: Date;
+  tanggalselesai: Date;
+  harga: Number;
+  dataUpdate: any;
+  dataPembayaran: Data;
+  idBarang: any;
+  today : Date;
+  dataSewaDetail : any;
+  cek : true;
+ 
+
+  public temp_var: Object = false;
+
+
+  constructor(private http: Http, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    })
+    this.dataBarangUpdate = [];
+  }
+
+  ngOnInit() {
+    //document.cookie="token=";
+    //document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    //debugger;
+
+    // if (document.cookie=="") {
+    //   window.location.href='./login';
+    // }else{
+
+
+    this.http.get('https://penyewaanbatch124.herokuapp.com/api/datasewafull?token='+localStorage.getItem("token"))
+      .subscribe((res: Response) => {
+        this.dataSewa = res.json();
+        // this.dataSewa.KdDataSewa = 'KDS'+this.dataSewa.KdBarang+this.dataSewa.UserNamePenyewa;
+        this.temp_var = true;
+        this.today = new Date();
+for (var index = 0; index < this.dataSewa.length; index++) {
+  if (this.dataSewa[index].StatusDataSewa=="aktif" && new Date(this.dataSewa[index].TglSelesai)<this.today) {
+    console.log("masuk sini")
+    
+    console.log(this.dataSewa[index]._id)
+    this.http.get('https://penyewaanbatch124.herokuapp.com/api/datasewa/'+this.dataSewa[index]._id+'?token='+localStorage.getItem("token"))
+    .subscribe((res: Response) => {
+      this.dataSewaDetail = res.json();
+      this.dataSewaDetail.StatusDataSewa="late"
+      this.http.put('https://penyewaanbatch124.herokuapp.com/api/datasewa/'+this.dataSewaDetail._id+'?token='+localStorage.getItem("token"),this.dataSewaDetail)
       .subscribe((res:Response)=>{
-        window.location.href='./datasewa';
-  
+      //  window.location.href='./datasewa';
+     
       })
-    }
-  
+      
+    })
+    
+
   }
   
+}
+
+        $(document).ready(function () {
+          $('#example').DataTable();
+
+        })
+      });
+    // } 
+  }
+
+  datasewaDelete(id) {
+    if (confirm("apakah anda yakin akan menghapus data ini ?") == true) {
+      this.http.delete('https://penyewaanbatch124.herokuapp.com/api/datasewa/' + id+'?token='+localStorage.getItem("token"))
+        .subscribe((res: Response) => {
+          window.location.href = './datasewa';
+        })
+    } else {
+    }
+  }
+
+  konfPembayaran(id, kdbarang, statusdatasewa) {
+
+    if (statusdatasewa=="booked") {
+      this.cek=true;
+      this.http.get('https://penyewaanbatch124.herokuapp.com/api/datasewa/' + id+'?token='+localStorage.getItem("token"))
+      .subscribe((res: Response) => {
+        this.dataDetail = res.json();
+        this.tanggalmulai = this.dataDetail.TglMulai;
+        this.tanggalselesai = this.dataDetail.TglSelesai;
+        this.dataUpdate = this.dataDetail;
+        this.dataUpdate.StatusDataSewa = "aktif";
+        console.log(this.dataUpdate.StatusDataSewa)
+
+        //  this.dataDetail.StatusDataSewa="aktif";
+        this.http.get('https://penyewaanbatch124.herokuapp.com/api/kdbarang/' + kdbarang)
+          .subscribe((res: Response) => {
+            this.dataBarang = res.json();
+            this.dataBarangUpdate = this.dataBarang[0];
+            this.idBarang = this.dataBarang[0]._id;
+            this.harga = this.dataBarang[0].HargaSewa * Math.floor((Date.parse(this.tanggalselesai.toString()) - Date.parse(this.tanggalmulai.toString())) / 86400000)
+            this.dataPembayaran = new Data();
+            debugger;
+            console.log("harga : " + this.harga);
+            // window.location.href='./datasewa';
+          });
+
+      })
+  
+    }else {
+      alert("sudah di bayar");
+    }
+  
+
+  }
+
+  datasewaEdit(id) {
+    // if (document.cookie=="") {
+    //   window.location.href='./login';
+    // }else{
+
+
+        
+        this.http.put('https://penyewaanbatch124.herokuapp.com/api/datasewa/' + id, this.dataUpdate)
+        .subscribe((res: Response) => {
+  
+          this.dataPembayaran.UserNamePenyewa = this.dataUpdate.UserNamePenyewa;
+          this.dataPembayaran.HargaTotal = this.harga;
+          this.dataPembayaran.TglPembayaran = new Date();
+          this.dataPembayaran.TglPembayaran = this.dataPembayaran.TglPembayaran
+          this.dataPembayaran.StatusPembayaran = "lunas";
+          this.dataPembayaran.KdDataSewa = this.dataUpdate.KdDataSewa;
+          // this.dataBarangUpdate.JumlahBarang = this.dataBarangUpdate.JumlahBarang - this.dataUpdate.JumlahBarang;
+          debugger;
+          this.http.put('https://penyewaanbatch124.herokuapp.com/api/barang/' + this.idBarang, this.dataBarangUpdate)
+            .subscribe((res: Response) => {
+              
+              
+              
+              let header = new Headers({ 'Content-Type': 'application/json' });
+              let opsi = new RequestOptions({ headers: header });
+              let data = JSON.stringify(this.dataPembayaran);
+              this.http.post('https://penyewaanbatch124.herokuapp.com/api/pembayaran', data, opsi)
+                .subscribe((res: Response) => {
+                  window.location.href = './datasewa';
+                  debugger;
+  
+  
+            })
+  
+        })
+
+      });
+    
+
+    // }
+  }
+
+  kembaliBarang(id,statusdatasewa){
+    if (statusdatasewa=="booked") {
+      alert("anda harus bayar terlebih dahulu")
+    }else if (statusdatasewa=="selesai") {
+      alert("barang sudah dikembalikan")
+    }else {
+      window.location.href = './datasewa/kembali/'+id;
+    }
+    
+    
+  }
+}

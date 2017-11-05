@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Http,Response } from '@angular/http';
+import { Http, Response, Request, Headers, RequestOptions } from '@angular/http';
+import { ActivatedRoute, Routes } from '@angular/router';
 import * as $ from 'jquery';
-import 'datatables.net'
+import 'datatables.net';
+import { Data } from './pembayaranadd/pembayaranaddModel';
 
 @Component({
   selector: 'app-pembayaran',
@@ -9,8 +11,11 @@ import 'datatables.net'
   styleUrls: ['./pembayaran.component.css']
 })
 export class PembayaranComponent implements OnInit {
-  dataPembayaran:Object;
+  dataPembayaran:any;
   id:String;
+  dataDetail : Object;
+  dataEdit : Object;
+  dataPembayaranTambah: Data;
   
   public temp_var: Object=false;
     constructor(private http:Http) { }
@@ -25,10 +30,11 @@ export class PembayaranComponent implements OnInit {
       // }else{
         
         
-        this.http.get('https://penyewaanbatch124.herokuapp.com/api/pembayaran')
+        this.http.get('https://penyewaanbatch124.herokuapp.com/api/pembayaran?token='+localStorage.getItem("token"))
         .subscribe((res:Response) =>{
-          this.dataPembayaran=res.json()
+          this.dataPembayaran=res.json();
           this.temp_var=true;
+          debugger;
           $(document).ready(function(){
             $('#example').DataTable();
         })
@@ -37,11 +43,14 @@ export class PembayaranComponent implements OnInit {
     }
   
     pembayaranDelete(id){
-      this.http.delete('https://penyewaanbatch124.herokuapp.com/api/pembayaran/'+id)
+      if (confirm("apakah anda yakin akan menghapus data ini ?")==true) {
+      this.http.delete('https://penyewaanbatch124.herokuapp.com/api/pembayaran/'+id+'?token='+localStorage.getItem("token"))
       .subscribe((res:Response)=>{
         window.location.href='./pembayaran';
-  
       })
+    }else{
+
+    }
     }
   
   }

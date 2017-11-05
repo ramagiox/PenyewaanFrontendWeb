@@ -4,7 +4,7 @@
         <h3 class="box-title">Data Pembayaran</h3>
 
         <div class="box-tools pull-right">
-          <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Pembayaran</span></a>
+          <!-- <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Pembayaran</span></a> -->
         </div>
       </div>
       <!-- /.box-header -->
@@ -13,9 +13,11 @@
               <table id="example"   class="table table-striped table-bordered" *ngIf="this.temp_var">
                       <thead>
                         <tr>
-                            <th>Kode Pembayaran</th>
+                            <th>Kode Data Sewa</th>
+                            <th>Username Penyewa</th>
                             <th>Tanggal Pembayaran</th>
                             <th>Harga Total</th>
+                            
                             <th>Status Pembayaran</th>
                            
                             
@@ -25,7 +27,8 @@
                       <tbody>
                         <tr *ngFor="let rec of this.dataPembayaran">
                            
-                            <td>{{rec.KdPembayaran}}</td>
+                            <td>{{rec.KdDataSewa}}</td>
+                            <td>{{rec.UserNamePenyewa}}</td>
                             <td>{{rec.TglPembayaran}}</td>
                             <td>{{rec.HargaTotal}}</td>
                             <td>{{rec.StatusPembayaran}}</td>
@@ -33,7 +36,7 @@
                             
                             <td>
                                   <a class ="label label-success" [routerLink]="['./detail/'+rec._id]"><span class="glyphicon glyphicon-search"></span></a>
-                                  <a class ="label label-info" [routerLink]="['./edit/'+rec._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                                  <!-- <a class ="label label-info" [routerLink]="['./edit/'+rec._id]"><span class="glyphicon glyphicon-pencil"></span></a> -->
                                   <a class ="label label-danger" (click)= "pembayaranDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                            

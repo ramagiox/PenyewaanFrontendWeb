@@ -4,7 +4,7 @@
         <h3 class="box-title">Data Sewa</h3>
 
         <div class="box-tools pull-right">
-          <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Data Sewa</span></a>
+          <!-- <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Data Sewa</span></a> -->
         </div>
       </div>
       <!-- /.box-header -->
@@ -14,23 +14,26 @@
                       <thead>
                         <tr>
                             <th>Kode Data Sewa</th>
-                            <th>Kode Pegawai</th>
-                            <th>Kode Penyewa</th>
-                            <th>Kode Barang</th>
+                            <th>Nama Penyewa</th>
+                            <th>Status Data Sewa</th>
+                            <th>Jumlah Data Sewa</th>
                             <th data-orderable="false">Aksi</th>
                       </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let rec of this.dataSewa">
-                           
                             <td>{{rec.KdDataSewa}}</td>
-                            <td>{{rec.KdPegawai}}</td>
-                            <td>{{rec.KdPenyewa}}</td>
-                            <td>{{rec.KdBarang}}</td>
+                            <td>{{rec.PenyewaInfo.NamaPenyewa}}</td>
+                            <td>{{rec.StatusDataSewa}}</td>
+                            <td>{{rec.JumlahBarang}}</td>
                             <td>
                                   <a class ="label label-success" [routerLink]="['./detail/'+rec._id]"><span class="glyphicon glyphicon-search"></span></a>
-                                  <a class ="label label-info" [routerLink]="['./edit/'+rec._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                                  <!-- <a class ="label label-info" [routerLink]="['./edit/'+rec._id]"><span class="glyphicon glyphicon-pencil"></span></a> -->
                                   <a class ="label label-danger" (click)= "datasewaDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
+                                  <a class ="label label-success" 
+                                  (click)= "konfPembayaran(rec._id,rec.KdBarang,rec.StatusDataSewa)">
+                                    <span data-toggle="modal" data-target="#konfirmasipembayaran" class="fa fa-dollar"></span></a>
+                                  <a class ="label label-info" (click)="kembaliBarang(rec._id,rec.StatusDataSewa)"><span class="fa fa-credit-card-alt" aria-hidden="true"> </span></a>
                             </td>
                            
                           </tr>
@@ -42,4 +45,86 @@
       <!-- ./box-body -->
       </div>
       <!-- /.box-footer -->
+    </div>
+
+
+<!-- modal konfirmasi pembayaran -->
+    <div class="modal fade" id="konfirmasipembayaran" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+              <form nama="datasewaedit"  action ="" class="form-horizontal" *ngIf="dataUpdate">
+                  
+                      <div class="col-md-12">
+                          <div class="box box-primary">
+                            <div class="box-header">
+                              <h3 class="box-title">Pembayaran</h3>
+                            </div>
+                            <div class="box-body">
+                    <div class="col-sm-12 form-group" >
+                      <label for="inputEmail3" class="control-label">Kode Data Sewa</label>
+                   
+                        <input disabled name= "KdDataSewa" [(ngModel)]="dataUpdate.KdDataSewa" type="text" class="form-control"  placeholder="">
+                   
+                    </div>
+                  
+                    <div class="col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Username Pegawai</label>
+                     
+                              <input name = "UserNamePegawai" [(ngModel)]="dataUpdate.UserNamePegawai" type="text" class="form-control"  placeholder="">
+                        
+                          </div>
+                  
+                          
+                  
+                          <div class="col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Username Penyewa</label>
+                         
+                              <input disabled name = "UserNamePenyewa" [(ngModel)]="dataUpdate.UserNamePenyewa" type="text" class="form-control"  placeholder="">
+                       
+                          </div>
+                
+                          <div class="col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Kode Barang</label>
+                           
+                              <input disabled name = "KdBarang" [(ngModel)]="dataUpdate.KdBarang" type="text" class="form-control"  placeholder="">
+                            
+                          </div>
+                
+                          <div class="col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Status Data Sewa</label>
+                          
+                              <input disabled name = "StatusDataSewa" [(ngModel)]="dataUpdate.StatusDataSewa" type="text" class="form-control"  placeholder="">
+                            
+                          </div>
+                
+                          <div class="col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Tanggal Mulai</label>
+                         
+                              <input disabled name = "TglMulai" [(ngModel)]="dataUpdate.TglMulai" type="text" class="form-control"  placeholder="">
+                            
+                          </div>
+              
+                          <div class="col-sm-12 form-group">
+                              <label for="inputEmail3" class="control-label">Tanggal Selesai</label>
+                            
+                                <input disabled name = "TglSelesai" [(ngModel)]="dataUpdate.TglSelesai" type="text" class="form-control"  placeholder="">
+                            
+                            </div>
+              
+                            <div class=" col-sm-12 form-group">
+                                <label for="inputEmail3" class="control-label">Jumlah Barang</label>
+                               
+                                  <input disabled name = "JumlahBarang" [(ngModel)]="dataUpdate.JumlahBarang" type="text" class="form-control"  placeholder="">
+                                
+                              </div>
+                  
+                         
+                          
+                          <button class="btn btn-success" (click)= "datasewaEdit(dataUpdate._id)" type="submit" style="float:right;"> Submit </button>
+                          </div>
+                          </div>
+                          </div>
+                  </form>
+        </div>
+      </div>
     </div>

@@ -23,7 +23,7 @@ export class DataSewaeditComponent implements OnInit {
       //   window.location.href='./login';
       // }else{
       this.id;
-      this.http.get('https://penyewaanbatch124.herokuapp.com/api/datasewa/'+this.id)
+      this.http.get('https://penyewaanbatch124.herokuapp.com/api/datasewa/'+this.id+'?token='+localStorage.getItem("token"))
       .subscribe((res:Response)=>{
         this.dataEdit=res.json();
         debugger;
@@ -39,7 +39,7 @@ export class DataSewaeditComponent implements OnInit {
       // }else{
     
       
-        this.http.put('https://penyewaanbatch124.herokuapp.com/api/datasewa/'+this.id,this.dataEdit)
+        this.http.put('https://penyewaanbatch124.herokuapp.com/api/datasewa/'+this.id+'?token='+localStorage.getItem("token"),this.dataEdit)
         .subscribe((res:Response)=>{
          window.location.href='./datasewa';
          debugger;

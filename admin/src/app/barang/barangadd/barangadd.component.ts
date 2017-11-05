@@ -11,6 +11,7 @@ import { Data } from './barangaddModel';
 export class BarangaddComponent implements OnInit {
   dataBarang : Data;
   KategoriBarang : Object;
+  kode : String;
   constructor(private http:Http, private route:ActivatedRoute) {  }
   
     ngOnInit() {
@@ -51,13 +52,22 @@ export class BarangaddComponent implements OnInit {
       }else if (!b.match(number) || !c.match(number) || !d.match(number)) {
           alert("harga denda, jumlah barang dan harga sewa harus angka")
       }else{
-        let header = new Headers({'Content-Type':'application/json'});
-        let opsi = new RequestOptions({headers:header});
-        let data = JSON.stringify(this.dataBarang);
-        this.http.post('https://penyewaanbatch124.herokuapp.com/api/barang',data,opsi)
-        .subscribe((res:Response)=>{
-          window.location.href='./barang';
-        })
+        this.http.get("http://localhost:8889/api/kdbarang/"+this.dataBarang.KdBarang)
+        .subscribe((res:Response) => {
+            this.kode = res.json();
+            if(this.kode == ""){
+              let header = new Headers({'Content-Type':'application/json'});
+              let opsi = new RequestOptions({headers:header});
+              let data = JSON.stringify(this.dataBarang);
+              this.http.post('https://penyewaanbatch124.herokuapp.com/api/barang',data,opsi)
+              .subscribe((res:Response)=>{
+                window.location.href='./barang';
+              })
+            }else {
+              alert("kode barang sudah ada")
+            }
+          });
+        
       }
       
     // }

@@ -4,7 +4,7 @@
         <h3 class="box-title">Data Akun</h3>
 
         <div class="box-tools pull-right">
-          <a class ="btn btn-sm btn-info btn-flat" [routerLink]="['./add']"><span> Tambah Akun</span></a>
+          <a class ="btn btn-sm btn-info btn-flat" (click)= "tambahKategori()" data-toggle="modal" data-target="#kategoritambah"><span> Tambah Akun</span></a>
         </div>
       </div>
       <!-- /.box-header -->
@@ -26,7 +26,7 @@
                             <td>{{rec.NamaKategori}}</td>
                          
                             <td>
-                                  <a class ="label label-info" [routerLink]="['./edit/'+rec._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                                  <a class ="label label-info" (click)= "kategorimodal(rec._id)" data-toggle="modal" data-target="#kategoriedit"><span class="glyphicon glyphicon-pencil"></span></a>
                                   <a class ="label label-danger" (click)= "kategoriDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                            
@@ -40,3 +40,84 @@
       </div>
       <!-- /.box-footer -->
     </div>
+
+
+
+    <!-- Kategori Edit -->
+    <div class="modal fade" id="kategoriedit" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form nama="akunedit" action="" class="form-horizontal" *ngIf="dataEdit">
+
+              <div class="col-md-12">
+                <div class="box box-primary">
+                  <div class="box-header">
+                    <h3 class="box-title">Akun Edit</h3>
+                  </div>
+                  <div class="box-body">
+                    <div class="col-sm-12 form-group">
+                      <label for="inputEmail3" class="control-label">Kode Kategori</label>
+
+                      <input disabled name="KdKategori" [(ngModel)]="dataEdit.KdKategori" type="text" class="form-control" placeholder="">
+
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                      <label for="inputEmail3" class=" control-label">Nama Kategori</label>
+
+                      <input name="NamaKategori" [(ngModel)]="dataEdit.NamaKategori" type="text" class="form-control" placeholder="">
+
+                    </div>
+
+
+                    <div class="col-sm-12 form-group">
+                      <button class="btn btn-success" (click)="kategoriEdit(dataEdit._id,dataEdit)" type="submit" style="float:right;"> Save </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Kategori Tambah -->
+
+    <div class="modal fade" id="kategoritambah" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+                <form name="kategoriadd" *ngIf="dataKategoriTambah" (ngSubmit)="createKategori(dataKategoriTambah)" class="form-horizontal">
+                    
+                    <div class="col-md-12">
+                      <div class="box box-primary">
+                        <div class="box-header">
+                          <h3 class="box-title">Tambah Kategori</h3>
+                        </div>
+                        <div class="box-body">
+                      <div class="col-sm-12 form-group">
+                        <label for="inputEmail3" class="control-label">Kode Kategori</label>
+                       
+                          <input name ="KdKategori" [(ngModel)]="dataKategoriTambah.KdKategori"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Kategori">
+                        
+                      </div>
+                    
+                      <div class="col-sm-12 form-group">
+                              <label for="inputEmail3" class="control-label">Nama Kategori</label>
+                             
+                                <input name ="NamaKategori" [(ngModel)]="dataKategoriTambah.NamaKategori"  type="text" class="form-control" id="inputEmail3" placeholder="Nama Kategori">
+                              
+                            </div>
+                            
+                            <div class="col-sm-12 form-group">
+                            <button class="btn btn-success" type="submit" style="float:right;"> Save </button>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                     
+                    </form>
+          </div>
+        </div>
+      </div>

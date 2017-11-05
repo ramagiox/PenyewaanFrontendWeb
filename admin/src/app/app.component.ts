@@ -10,5 +10,5 @@ export class AppComponent {
   title = 'app';
   constructor(private router : Router){
   };
-  myimage="https://upload.wikimedia.org/wikipedia/id/5/50/Isyana_sarasvati_explore.jpeg";
+ 
 }

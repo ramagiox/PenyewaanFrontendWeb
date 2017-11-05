@@ -8,7 +8,7 @@ import { Routes, ActivatedRoute } from '@angular/router';
   styleUrls: ['./pembayaranedit.component.css']
 })
 export class PembayaraneditComponent implements OnInit {
-  dataEdit : Object;
+  dataEdit : any;
   id:String;
   
     constructor(private http:Http, private route:ActivatedRoute) {
@@ -22,10 +22,12 @@ export class PembayaraneditComponent implements OnInit {
       //   window.location.href='./login';
       // }else{
       this.id;
-      this.http.get('https://penyewaanbatch124.herokuapp.com/api/pembayaran/'+this.id)
+      this.http.get('https://penyewaanbatch124.herokuapp.com/api/pembayaran/'+this.id+'?token='+localStorage.getItem("token"))
       .subscribe((res:Response)=>{
         this.dataEdit=res.json();
-        debugger;
+         this.dataEdit.TglPembayaran = new Date();
+         this.dataEdit.TglPembayaran =  this.dataEdit.TglPembayaran.toDateString();
+         debugger;
       })
 
     // }
@@ -36,7 +38,7 @@ export class PembayaraneditComponent implements OnInit {
       // }else{
     
       
-        this.http.put('https://penyewaanbatch124.herokuapp.com/api/pembayaran/'+this.id,this.dataEdit)
+        this.http.put('https://penyewaanbatch124.herokuapp.com/api/pembayaran/'+this.id+'?token='+localStorage.getItem("token"),this.dataEdit)
         .subscribe((res:Response)=>{
          window.location.href='./pembayaran';
          debugger;

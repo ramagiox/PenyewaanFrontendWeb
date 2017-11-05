@@ -42,7 +42,7 @@ export class PembayaranaddComponent implements OnInit {
         let header = new Headers({'Content-Type':'application/json'});
         let opsi = new RequestOptions({headers:header});
         let data = JSON.stringify(this.dataPembayaran);
-        this.http.post('https://penyewaanbatch124.herokuapp.com/api/pembayaran',data,opsi)
+        this.http.post('https://penyewaanbatch124.herokuapp.com/api/pembayaran?token='+localStorage.getItem("token"),data,opsi)
         .subscribe((res:Response)=>{
           window.location.href='./pembayaran';
         })

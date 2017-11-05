@@ -1,4 +1,4 @@
-<form name="barangadd" (ngSubmit)="createDataSewa(dataSewa)" class="form-horizontal">
+<form name="datasewaadd" (ngSubmit)="createDataSewa(dataSewa)" class="form-horizontal">
     
     <div class="col-md-12">
       <div class="box box-primary">
@@ -14,16 +14,16 @@
       </div>
     
       <div class="form-group">
-              <label for="inputEmail3" class="col-sm-2 control-label">Kode Pegawai</label>
+              <label for="inputEmail3" class="col-sm-2 control-label">Username Pegawai</label>
               <div class="col-sm-10">
-                <input name ="KdPegawai" [(ngModel)]="dataSewa.KdPegawai"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Pegawai">
+                <input name ="UserNamePegawai" [(ngModel)]="dataSewa.UserNamePegawai"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Pegawai">
               </div>
             </div>
   
             <div class="form-group">
-              <label for="inputEmail3" class="col-sm-2 control-label">Kode Penyewa</label>
+              <label for="inputEmail3" class="col-sm-2 control-label">Username Penyewa</label>
               <div class="col-sm-10">
-                <input name ="KdPenyewa" [(ngModel)]="dataSewa.KdPenyewa"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Penyewa">
+                <input name ="UserNamePenyewa" [(ngModel)]="dataSewa.UserNamePenyewa"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Penyewa">
               </div>
             </div>
   
