@@ -29,8 +29,8 @@
                            
                             <td>{{rec.KdDataSewa}}</td>
                             <td>{{rec.UserNamePenyewa}}</td>
-                            <td>{{rec.TglPembayaran}}</td>
-                            <td>{{rec.HargaTotal}}</td>
+                            <td>{{rec.TglPembayaran | date: 'dd-MMM-yyyy'}}</td>
+                            <td>{{rec.HargaTotal | currency:'IDR'}}</td>
                             <td>{{rec.StatusPembayaran}}</td>
                           
                             

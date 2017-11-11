@@ -25,6 +25,7 @@ export class PembayarandetailComponent implements OnInit {
       this.http.get('https://penyewaanbatch124.herokuapp.com/api/pembayaran/'+this.id+'?token='+localStorage.getItem("token"))
       .subscribe((res:Response)=>{
         this.dataDetail=res.json();
+        debugger;
        
       })
     // }

@@ -16,7 +16,9 @@ export class PembayaranComponent implements OnInit {
   dataDetail : Object;
   dataEdit : Object;
   dataPembayaranTambah: Data;
+
   
+
   public temp_var: Object=false;
     constructor(private http:Http) { }
   
@@ -34,6 +36,7 @@ export class PembayaranComponent implements OnInit {
         .subscribe((res:Response) =>{
           this.dataPembayaran=res.json();
           this.temp_var=true;
+		  
           debugger;
           $(document).ready(function(){
             $('#example').DataTable();

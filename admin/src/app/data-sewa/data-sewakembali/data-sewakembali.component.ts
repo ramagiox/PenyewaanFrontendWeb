@@ -15,7 +15,7 @@ export class DataSewakembaliComponent implements OnInit {
   dataDetail: any;
   dataBarang : any;
   today: Date;
-  denda: Number;
+  denda: number;
   tanggal : Date;
   dataDenda : Data
 
@@ -45,7 +45,7 @@ export class DataSewakembaliComponent implements OnInit {
           if (this.today > new Date(this.tanggal)) {
             //this.timeDiff = Math.abs(this.today.getTime() - this.dataPenyewa[0].TglSelesai.getTime());
             //this.diffDays = Math.ceil(this.timeDiff / (1000 * 3600 * 24));
-            this.denda = this.dataBarang[0].HargaDenda * Math.floor((Date.parse(this.today.toString()) - Date.parse(this.tanggal.toString())) / 86400000);
+            this.denda = this.dataDetail.JumlahBarang *this.dataBarang[0].HargaDenda * Math.floor((Date.parse(this.today.toString()) - Date.parse(this.tanggal.toString())) / 86400000);
             console.log("denda : " + this.denda);
           }
         })
@@ -56,7 +56,8 @@ export class DataSewakembaliComponent implements OnInit {
     this.dataDenda.KdDenda="";
     this.dataDenda.KdDataSewa=this.dataDetail.KdDataSewa;
     this.dataDenda.KdBarang=this.dataBarang[0].KdBarang;
-    this.dataDenda.JumlahDenda=this.denda;
+    this.dataDenda.JumlahDenda= this.denda;
+    
     this.dataDenda.StatusDenda="Lunas";
     let header = new Headers({'Content-Type':'application/json'});
     let opsi = new RequestOptions({headers:header});
@@ -76,6 +77,7 @@ export class DataSewakembaliComponent implements OnInit {
     })
 
     this.dataBarang[0].JumlahBarang = this.dataBarang[0].JumlahBarang+this.dataDetail.JumlahBarang;
+    this.dataBarang[0].StatusBarang = "Available"
     console.log(this.idBarang);
     debugger;
     this.http.put('https://penyewaanbatch124.herokuapp.com/api/barang/'+this.idBarang,this.dataBarang[0])

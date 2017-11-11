@@ -30,9 +30,9 @@
                                   <a class ="label label-success" [routerLink]="['./detail/'+rec._id]"><span class="glyphicon glyphicon-search"></span></a>
                                   <!-- <a class ="label label-info" [routerLink]="['./edit/'+rec._id]"><span class="glyphicon glyphicon-pencil"></span></a> -->
                                   <a class ="label label-danger" (click)= "datasewaDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
-                                  <a class ="label label-success" 
-                                  (click)= "konfPembayaran(rec._id,rec.KdBarang,rec.StatusDataSewa)">
-                                    <span data-toggle="modal" data-target="#konfirmasipembayaran" class="fa fa-dollar"></span></a>
+                                  <a id="pembayaran" class ="label label-success" 
+                                  (click)= "konfPembayaran(rec._id,rec.KdBarang,rec.StatusDataSewa, rec.TglMulai)" data-toggle="modal" data-target="#konfirmasipembayaran">
+                                    <span  class="fa fa-dollar"></span></a>
                                   <a class ="label label-info" (click)="kembaliBarang(rec._id,rec.StatusDataSewa)"><span class="fa fa-credit-card-alt" aria-hidden="true"> </span></a>
                             </td>
                            
@@ -49,7 +49,7 @@
 
 
 <!-- modal konfirmasi pembayaran -->
-    <div class="modal fade" id="konfirmasipembayaran" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+    <div class="modal fade" id="konfirmasipembayaran" role="dialog" aria-labelledby="modaldetailtitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
               <form nama="datasewaedit"  action ="" class="form-horizontal" *ngIf="dataUpdate">
@@ -117,10 +117,17 @@
                                   <input disabled name = "JumlahBarang" [(ngModel)]="dataUpdate.JumlahBarang" type="text" class="form-control"  placeholder="">
                                 
                               </div>
+
+                              <div class=" col-sm-12 form-group">
+                                <label for="inputEmail3" class="control-label">Harga</label>
+                               
+                                  <input disabled name = "harga" [(ngModel)]="harga" type="text" class="form-control"  placeholder="">
+                                
+                              </div>
                   
                          
                           
-                          <button class="btn btn-success" (click)= "datasewaEdit(dataUpdate._id)" type="submit" style="float:right;"> Submit </button>
+                          <button class="btn btn-success" (click)= "datasewaPosttoPembayaran(dataUpdate._id)" type="submit" style="float:right;"> Submit </button>
                           </div>
                           </div>
                           </div>

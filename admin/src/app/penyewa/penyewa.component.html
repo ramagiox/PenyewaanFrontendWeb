@@ -17,6 +17,8 @@
                           <th>Username</th>
                           <th>Nama Penyewa</th>
                           <th>Email Penyewa</th>
+						  <th>Umur</th>
+						  
                           <th data-orderable="false">Aksi</th>
                     </tr>
                     </thead>
@@ -27,6 +29,8 @@
                           <td>{{rec.UserNamePenyewa}}</td>
                           <td>{{rec.NamaPenyewa}}</td>
                           <td>{{rec.EmailPenyewa}}</td>
+						  <td>{{rec.umur}}</td>
+						  
                           <td>
                                 <a class ="label label-success" (click)= "penyewaDetailModal(rec._id)" data-toggle="modal" data-target="#penyewadetail"><span class="glyphicon glyphicon-search"></span></a>
                                 <a class ="label label-info" (click)= "penyewaDetailModal(rec._id)" data-toggle="modal" data-target="#penyewaedit"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -119,6 +123,15 @@
                                 </td>
                                
                               </tr>
+
+                              <tr >
+                                <td>7.</td>
+                                <td>Tgl Lahir</td>
+                                <td>
+                                    {{dataDetail.TglLahir | date:"dd-MMM-yyyy"}}
+                                </td>
+                               
+                              </tr>
                   
                           </table>
               </div>
@@ -185,6 +198,13 @@
                             <label for="inputEmail3" class="control-label">No Telp</label>
                            
                               <input name = "NoTelp" [(ngModel)]="dataEdit.NoTelp" type="text" class="form-control"  placeholder="">
+                        
+                          </div>
+
+                          <div class=" col-sm-12 form-group">
+                            <label for="inputEmail3" class="control-label">Tgl Lahir</label>
+                           
+                              <input name = "TglLahir" max={{this.maxDate}} [(ngModel)]="dataEdit.TglLahir" type="date" class="form-control"  placeholder="">
                         
                           </div>
                   
@@ -257,6 +277,13 @@
                               <label for="inputEmail3" class="  control-label">No Telp</label>
                             
                                 <input name ="NoTelp" [(ngModel)]="dataPenyewaTambah.NoTelp"  type="text" class="form-control" id="inputEmail3" placeholder="No Telp">
+                             
+                            </div>
+							
+							<div class=" col-sm-12 form-group">
+                              <label for="inputEmail3" class="  control-label">Tanggal Lahir</label>
+                          
+                                <input name ="TglLahir" max={{this.maxDate}} [(ngModel)]="dataPenyewaTambah.TglLahir"  type="date" class="form-control" id="inputEmail3" placeholder="">
                              
                             </div>
                   

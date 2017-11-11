@@ -37,9 +37,16 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("token",res.json());
           localStorage.setItem("username",this.dataLogin.UserNamePegawai)
           console.log(localStorage.getItem("token"))
-          window.location.href='./';
+          if (localStorage.token=="") {
+            alert("username / password salah")
+            
+          }else{
+            window.location.href='./';
+          }
+          
           debugger;
-        })
+        },
+      (err)=>alert("username / password salah"))
       }
     }
   

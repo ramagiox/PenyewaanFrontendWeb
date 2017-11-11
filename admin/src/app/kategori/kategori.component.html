@@ -1,123 +1,124 @@
 <div class="col-md-12">
-    <div class="box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Data Akun</h3>
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Data Kategori</h3>
 
-        <div class="box-tools pull-right">
-          <a class ="btn btn-sm btn-info btn-flat" (click)= "tambahKategori()" data-toggle="modal" data-target="#kategoritambah"><span> Tambah Akun</span></a>
-        </div>
+      <div class="box-tools pull-right">
+        <a class="btn btn-sm btn-info btn-flat" (click)="tambahKategori()" data-toggle="modal" data-target="#kategoritambah"><span> Tambah Kategori</span></a>
       </div>
-      <!-- /.box-header -->
-      <div class="box-body" >
-  
-              <table id="example"   class="table table-striped table-bordered" *ngIf="this.temp_var">
-                      <thead>
-                        <tr>
-                            <th>Kode Kategori</th>
-                            <th>Nama Kategori</th>
-                   
-                            <th data-orderable="false">Aksi</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let rec of this.dataKategori">
-                           
-                            <td>{{rec.KdKategori}}</td>
-                            <td>{{rec.NamaKategori}}</td>
-                         
-                            <td>
-                                  <a class ="label label-info" (click)= "kategorimodal(rec._id)" data-toggle="modal" data-target="#kategoriedit"><span class="glyphicon glyphicon-pencil"></span></a>
-                                  <a class ="label label-danger" (click)= "kategoriDelete(rec._id)" ><span class="glyphicon glyphicon-trash"></span></a>
-                            </td>
-                           
-                          </tr>
-                       
-                      </tbody>
-                    </table>
-
-              
-      <!-- ./box-body -->
-      </div>
-      <!-- /.box-footer -->
     </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+      <table id="example" class="table table-striped table-bordered" *ngIf="this.temp_var">
+        <thead>
+          <tr>
+            <th>Kode Kategori</th>
+            <th>Nama Kategori</th>
+
+            <th data-orderable="false">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of this.dataKategori">
+
+            <td>{{item.KdKategori}}</td>
+            <td>{{item.NamaKategori}}</td>
+
+            <td>
+              <a class="label label-info" (click)="kategoriModal(item._id)" data-toggle="modal" data-target="#kategoriedit"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a class="label label-danger" (click)="kategoriDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+
+      <!-- ./box-body -->
+    </div>
+    <!-- /.box-footer -->
+  </div>
 
 
 
-    <!-- Kategori Edit -->
-    <div class="modal fade" id="kategoriedit" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form nama="akunedit" action="" class="form-horizontal" *ngIf="dataEdit">
+  <!-- Kategori Edit -->
+  <div class="modal fade" id="kategoriedit" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form nama="akunedit" action="" class="form-horizontal" *ngIf="dataEdit">
 
-              <div class="col-md-12">
-                <div class="box box-primary">
-                  <div class="box-header">
-                    <h3 class="box-title">Akun Edit</h3>
-                  </div>
-                  <div class="box-body">
-                    <div class="col-sm-12 form-group">
-                      <label for="inputEmail3" class="control-label">Kode Kategori</label>
+          <div class="col-md-12">
+            <div class="box box-primary">
+              <div class="box-header">
+                <h3 class="box-title">Akun Edit</h3>
+              </div>
+              <div class="box-body">
+                <div class="col-sm-12 form-group">
+                  <label for="inputEmail3" class="control-label">Kode Kategori</label>
 
-                      <input disabled name="KdKategori" [(ngModel)]="dataEdit.KdKategori" type="text" class="form-control" placeholder="">
+                  <input disabled name="KdKategori" [(ngModel)]="dataEdit.KdKategori" type="text" class="form-control" placeholder="">
 
-                    </div>
+                </div>
 
-                    <div class="col-sm-12 form-group">
-                      <label for="inputEmail3" class=" control-label">Nama Kategori</label>
+                <div class="col-sm-12 form-group">
+                  <label for="inputEmail3" class=" control-label">Nama Kategori</label>
 
-                      <input name="NamaKategori" [(ngModel)]="dataEdit.NamaKategori" type="text" class="form-control" placeholder="">
+                  <input name="NamaKategori" [(ngModel)]="dataEdit.NamaKategori" type="text" class="form-control" placeholder="">
 
-                    </div>
+                </div>
 
 
-                    <div class="col-sm-12 form-group">
-                      <button class="btn btn-success" (click)="kategoriEdit(dataEdit._id,dataEdit)" type="submit" style="float:right;"> Save </button>
-                    </div>
-                  </div>
+                <div class="col-sm-12 form-group">
+                  <button class="btn btn-success" (click)="kategoriEdit(dataEdit._id,dataEdit)" type="submit" style="float:right;"> Save </button>
                 </div>
               </div>
-            </form>
-        </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
 
-    <!-- Kategori Tambah -->
+  <!-- Kategori Tambah -->
 
-    <div class="modal fade" id="kategoritambah" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+  <div class="modal fade" id="kategoritambah" tabindex="-1" role="dialog" aria-labelledby="modaldetailtitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
 
-                <form name="kategoriadd" *ngIf="dataKategoriTambah" (ngSubmit)="createKategori(dataKategoriTambah)" class="form-horizontal">
-                    
-                    <div class="col-md-12">
-                      <div class="box box-primary">
-                        <div class="box-header">
-                          <h3 class="box-title">Tambah Kategori</h3>
-                        </div>
-                        <div class="box-body">
-                      <div class="col-sm-12 form-group">
-                        <label for="inputEmail3" class="control-label">Kode Kategori</label>
-                       
-                          <input name ="KdKategori" [(ngModel)]="dataKategoriTambah.KdKategori"  type="text" class="form-control" id="inputEmail3" placeholder="Kode Kategori">
-                        
-                      </div>
-                    
-                      <div class="col-sm-12 form-group">
-                              <label for="inputEmail3" class="control-label">Nama Kategori</label>
-                             
-                                <input name ="NamaKategori" [(ngModel)]="dataKategoriTambah.NamaKategori"  type="text" class="form-control" id="inputEmail3" placeholder="Nama Kategori">
-                              
-                            </div>
-                            
-                            <div class="col-sm-12 form-group">
-                            <button class="btn btn-success" type="submit" style="float:right;"> Save </button>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                     
-                    </form>
+        <form name="kategoriadd" *ngIf="dataKategoriTambah" (ngSubmit)="createKategori(dataKategoriTambah)" class="form-horizontal">
+
+          <div class="col-md-12">
+            <div class="box box-primary">
+              <div class="box-header">
+                <h3 class="box-title">Tambah Kategori</h3>
+              </div>
+              <div class="box-body">
+                <div class="col-sm-12 form-group">
+                  <label for="inputEmail3" class="control-label">Kode Kategori</label>
+
+                  <input name="KdKategori" [(ngModel)]="dataKategoriTambah.KdKategori" type="text" class="form-control" id="inputEmail3" placeholder="Kode Kategori">
+
+                </div>
+
+                <div class="col-sm-12 form-group">
+                  <label for="inputEmail3" class="control-label">Nama Kategori</label>
+
+                  <input name="NamaKategori" [(ngModel)]="dataKategoriTambah.NamaKategori" type="text" class="form-control" id="inputEmail3"
+                    placeholder="Nama Kategori">
+
+                </div>
+
+                <div class="col-sm-12 form-group">
+                  <button class="btn btn-success" type="submit" style="float:right;"> Save </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+
+        </form>
       </div>
+    </div>
+  </div>
