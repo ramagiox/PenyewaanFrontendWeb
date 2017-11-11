@@ -16,6 +16,7 @@ export class IndexheaderComponent implements OnInit {
   textLogin : String;
   dataLogout : String;
   dataButton : String;
+  usernamePenyewa : String;
 
   constructor(private http:Http) { }
 
@@ -50,11 +51,13 @@ export class IndexheaderComponent implements OnInit {
         let opsi = new RequestOptions({headers:header});
         let data = JSON.stringify(this.dataLogin);
         
-        this.http.post('https://penyewaanbatch124.herokuapp.com/api/login/authenticate/',data,opsi)
+        this.http.post('https://penyewaanbatch124.herokuapp.com/api/login/authenticate',data,opsi)
         .subscribe((res:Response)=>{
+          
           localStorage.setItem("token",res.json());
-         
-          if(localStorage.getItem("token")==null){
+         debugger;
+          if(res.json()[1]==null){
+            debugger;
             alert("Wrong Username / Password");
             window.location.href='./';
           } else{
@@ -63,7 +66,8 @@ export class IndexheaderComponent implements OnInit {
             window.location.href='./';
           }
          
-        })
+        },
+      (err)=>alert("Wrong Username / Password"))
         
       }
   registerCreate(dataRegister){
@@ -72,14 +76,26 @@ export class IndexheaderComponent implements OnInit {
     let opsi = new RequestOptions({headers : header});
     //let data = JSON.stringify({kdRegister : kode, NamaRegister : nama});
 
-    if(dataRegister.NamaPenyewa==""||dataRegister.NamaPenyewa==null||dataRegister.AlamatPenyewa==""||dataRegister.AlamatPenyewa==null||dataRegister.Email==""||dataRegister.Email==null||dataRegister.NoTelp==""||dataRegister.NoTelp==null||dataRegister.UserNamePenyewa==""||dataRegister.UserNamePenyewa==null||dataRegister.PasswordPenyewa==""||dataRegister.PasswordPenyewa==null){
+    if(dataRegister.NamaPenyewa==""||dataRegister.NamaPenyewa==null||dataRegister.AlamatPenyewa==""||dataRegister.AlamatPenyewa==null||dataRegister.EmailPenyewa==""||dataRegister.EmailPenyewa==null||dataRegister.NoTelp==""||dataRegister.NoTelp==null||dataRegister.UserNamePenyewa==""||dataRegister.UserNamePenyewa==null||dataRegister.PasswordPenyewa==""||dataRegister.PasswordPenyewa==null){
       alert("all field must be filled")
     } else{
-      this.http.post('https://penyewaanbatch124.herokuapp.com/api/penyewa/',JSON.stringify(dataRegister),opsi)
+      this.http.get('https://penyewaanbatch124.herokuapp.com/api/penyewa/search/' + dataRegister.UserNamePenyewa)
       .subscribe((res: Response) => {
-      
-        window.location.href="./";
+        this.usernamePenyewa = res.json();
+        if (this.usernamePenyewa == "" || this.usernamePenyewa == null) {
+          this.http.post('https://penyewaanbatch124.herokuapp.com/api/penyewa/',JSON.stringify(dataRegister),opsi)
+          .subscribe((res: Response) => {
+          
+            window.location.href="./";
+          })
+        
+        }else {
+          alert("username sudah ada")
+        }
       })
+
+
+      
     }
    
    

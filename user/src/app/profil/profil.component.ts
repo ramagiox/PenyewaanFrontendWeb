@@ -50,7 +50,7 @@ export class ProfilComponent implements OnInit {
 
 
   ngOnInit() {
-
+    debugger;
     this.today = new Date();
     this.dataSewaLate = [];
     if (localStorage.getItem("username") == null) {
@@ -175,26 +175,30 @@ export class ProfilComponent implements OnInit {
   }
 
   datasewaDelete(id,kdbarang) {
-        this.http.get('https://penyewaanbatch124.herokuapp.com/api/kdbarang/' + kdbarang)
+         // ambil id barang utk digunakan saat update jumlah barang
+        this.http.get('https://penyewaanbatch124.herokuapp.com/api/kdbarang/' + kdbarang+'?token='+localStorage.getItem("token"))
         .subscribe((res: Response) => {
           this.dataBarang = res.json()
           this.idBarang = this.dataBarang[0]._id;
-          debugger;
-         
+          
         
           this.http.get('https://penyewaanbatch124.herokuapp.com/api/datasewa/'+id+'?token='+localStorage.getItem("token"))
           .subscribe((res:Response)=>{
           //  window.location.href='./barang';
-           debugger;
+           
            this.dataSewaDetail=res.json();
            this.dataBarang[0].JumlahBarang=this.dataBarang[0].JumlahBarang+this.dataSewaDetail.JumlahBarang;
            console.log(this.dataBarang[0].JumlahBarang)
-           debugger;
+           
+		   
+		   
            this.http.put('https://penyewaanbatch124.herokuapp.com/api/barang/'+this.idBarang,this.dataBarang[0])
            .subscribe((res:Response)=>{
            //  window.location.href='./barang';
-            debugger;
+            
+			
             if (confirm("are you sure want to cencel this booking ?") == true) {
+				
               this.http.delete('https://penyewaanbatch124.herokuapp.com/api/datasewa/' + id+'?token='+localStorage.getItem("token"))
                 .subscribe((res: Response) => {
                   window.location.href='./profile/'+localStorage.getItem("username");
@@ -230,7 +234,7 @@ export class ProfilComponent implements OnInit {
       console.log("tgl selesai1 : "+Date.parse(item.TglSelesai.toString()));
     
       debugger;                  
-      this.denda=(this.dataSewaBarang[0].HargaDenda * Math.floor((Date.parse(this.today.toString()) - Date.parse(item.TglSelesai.toString())) / 86400000))
+      this.denda=(item.JumlahBarang * this.dataSewaBarang[0].HargaDenda * Math.floor((Date.parse(this.today.toString()) - Date.parse(item.TglSelesai.toString())) / 86400000))
       this.dataFineDetail = item;
 
   })
